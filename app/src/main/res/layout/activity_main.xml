@@ -1,9 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.thelkl321.angrymooseandroid.MainActivity">
+    android:background="@color/colorPrimary"
+    tools:context="com.example.thelkl321.angrymooseandroid.MainActivity" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- TODO: Replace the text with a custom made image -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="7"
+            android:gravity="center_vertical|center"
+            android:lineSpacingMultiplier="0.8"
+            android:text="ANGRY\nMOOSE"
+            android:textSize="70sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:text="PLAY" />
+
+        <Button
+            android:id="@+id/optionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="3"
+            android:text="OPTIONS" />
+
+        <Button
+            android:id="@+id/creditsButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="3"
+            android:text="CREDITS" />
+
+        <Button
+            android:id="@+id/exitButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="3"
+            android:text="EXIT" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/fbButton"
+                android:layout_height="match_parent"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/twitterButton"
+                android:layout_height="match_parent"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/rateButton"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>
