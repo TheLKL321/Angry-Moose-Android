@@ -25,6 +25,7 @@
             android:textSize="70sp"
             android:textStyle="bold" />
 
+        <!-- TODO: Customize buttons -->
         <Button
             android:id="@+id/playButton"
             android:layout_width="match_parent"
@@ -35,8 +36,6 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="40dp"
             android:layout_weight="2"
-            android:textColor="@color/colorText"
-            android:background="@color/colorPrimary"
             android:text="PLAY" />
 
         <Button
@@ -77,11 +76,12 @@
             android:layout_height="0dip"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
-            android:layout_weight="2"
+            android:layout_weight="2.07"
             android:gravity="end"
             android:orientation="horizontal"
             android:weightSum="6">
 
+            <!-- TODO: icons for buttons -->
             <Button
                 android:id="@+id/fbButton"
                 android:layout_width="5dp"
