@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/playText"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:lineSpacingMultiplier="0.8"
+        android:text="PLAY"
+        android:textColor="@color/colorText"
+        android:textSize="70sp"
+        android:textStyle="bold" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="10">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/easyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Easy"
+                android:contentDescription="Easy Difficulty"/>
+
+            <ImageButton
+                android:id="@+id/normalButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Normal"
+                android:contentDescription="Normal Difficulty" />
+
+            <ImageButton
+                android:id="@+id/hardButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Hard"
+                android:contentDescription="Hard Difficulty"/>
+
+            <ImageButton
+                android:id="@+id/impossibleButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Impossible"
+                android:contentDescription="Impossible Difficulty"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="horizontal"
+        android:layout_weight="4">
+
+        <Button
+            android:id="@+id/helpButton"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="Help"
+            android:layout_weight="1"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/timeButton"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="Time Attack"
+            android:layout_weight="1"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>

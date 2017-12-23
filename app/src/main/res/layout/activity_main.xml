@@ -14,11 +14,11 @@
 
         <!-- TODO: Replace the text with a custom made image -->
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titleText"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="5"
-            android:gravity="center_vertical|center"
+            android:gravity="center"
             android:lineSpacingMultiplier="0.8"
             android:text="ANGRY\nMOOSE"
             android:textColor="@color/colorText"
@@ -67,7 +67,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="80dp"
             android:layout_marginStart="80dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="2"
             android:text="EXIT" />
 
