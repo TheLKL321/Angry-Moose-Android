@@ -30,18 +30,16 @@
 
             <ImageButton
                 android:id="@+id/easyButton"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Easy"
-                android:contentDescription="Easy Difficulty"/>
+                android:contentDescription="Easy Difficulty" />
 
             <ImageButton
                 android:id="@+id/normalButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Normal"
                 android:contentDescription="Normal Difficulty" />
 
             <ImageButton
@@ -49,15 +47,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Hard"
                 android:contentDescription="Hard Difficulty"/>
 
             <ImageButton
                 android:id="@+id/impossibleButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Impossible"
                 android:contentDescription="Impossible Difficulty"/>
 
         </LinearLayout>
