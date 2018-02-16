@@ -18,6 +18,7 @@
         android:textSize="70sp"
         android:textStyle="bold" />
 
+    <!--
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="0dip"
@@ -58,6 +59,15 @@
 
         </LinearLayout>
     </HorizontalScrollView>
+    -->
+
+    <!-- TODO: page indicator? -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/buttonPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -86,5 +96,6 @@
             android:layout_marginEnd="35dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
+
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>
