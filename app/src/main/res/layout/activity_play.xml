@@ -61,7 +61,8 @@
     </HorizontalScrollView>
     -->
 
-    <!-- TODO: page indicator? -->
+    <!-- TODO: page indicator?
+         TODO: get rid of white ripple on edge -->
     <android.support.v4.view.ViewPager
         android:id="@+id/buttonPager"
         android:layout_width="match_parent"
@@ -84,7 +85,8 @@
             android:layout_marginStart="35dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:onClick="helpPressed"/>
 
         <Button
             android:id="@+id/timeButton"
@@ -95,7 +97,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="35dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:onClick="timePressed"/>
 
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>

@@ -19,14 +19,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void optionsPressed (View view){
-
+        Intent intent = new Intent(this, OptionsActivity.class);
+        startActivity(intent);
     }
 
     public void creditsPressed (View view){
-
+        // TODO: a popup with some credits
     }
 
     public void exitPressed (View view){
-
+        finish();
+        System.exit(0);
     }
 }
