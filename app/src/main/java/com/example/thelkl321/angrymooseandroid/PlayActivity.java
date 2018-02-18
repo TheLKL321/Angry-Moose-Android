@@ -1,5 +1,6 @@
 package com.example.thelkl321.angrymooseandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,9 @@ public class PlayActivity extends AppCompatActivity {
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
+
+    public static final String MOOSE_KEY = "moose";
+    public static final String PLAYER_KEY = "player";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,37 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void difficultyPressed (View view){
-        // TODO: communicating with fragment
+
+        int mooseHp, playerHp;
+        switch (mPagerAdapter.getCount()) {
+            case 0:
+                mooseHp = 15;
+                playerHp = 15;
+                break;
+
+            case 1:
+                mooseHp = 20;
+                playerHp = 10;
+                break;
+
+            case 2:
+                mooseHp = 30;
+                playerHp = 10;
+                break;
+
+            case 3:
+                mooseHp = 30;
+                playerHp = 2;
+                break;
+
+            default:
+                throw new NullPointerException();
+        }
+
+        Intent intent = new Intent(this, FightActivity.class);
+        intent.putExtra(MOOSE_KEY, mooseHp);
+        intent.putExtra(PLAYER_KEY, playerHp);
+        startActivity(intent);
     }
 
     // Adapter for buttonPager

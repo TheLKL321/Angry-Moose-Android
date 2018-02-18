@@ -33,7 +33,7 @@ public class PagerButtonsFragment extends android.support.v4.app.Fragment {
 
         ImageButton btn = (ImageButton) inflater.inflate(R.layout.fragment_pager_buttons, container, false);
 
-        int img = 0;
+        int img;
         switch (pageNumber) {
             case 0:
                 img = R.mipmap.easy_button;
@@ -52,9 +52,10 @@ public class PagerButtonsFragment extends android.support.v4.app.Fragment {
                 break;
 
             default:
-                // TODO: jakies exception
+                throw new NullPointerException();
         }
         btn.setImageResource(img);
+
 
         return btn;
     }

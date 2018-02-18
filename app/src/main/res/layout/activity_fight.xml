@@ -14,10 +14,11 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:progress="100"/>
 
     <ProgressBar
-        android:id="@+id/guyHealthBar"
+        android:id="@+id/playerHealthBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,7 +26,8 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:progress="100"/>
 
     <TableLayout
         android:id="@+id/controlsTableLayout"
