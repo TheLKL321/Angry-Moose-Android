@@ -3,8 +3,12 @@ package com.example.thelkl321.angrymooseandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class FightActivity extends AppCompatActivity{
 
@@ -26,6 +30,14 @@ public class FightActivity extends AppCompatActivity{
         playerHpBar = findViewById(R.id.playerHealthBar);
         mooseHpBar.setMax(mooseHp);
         playerHpBar.setMax(playerHp);
+
+        // Create scrollable log
+        ((TextView) findViewById(R.id.logText)).setMovementMethod(new ScrollingMovementMethod());
+    }
+
+    private void logEvent(String text){
+        TextView logBox = findViewById(R.id.logText);
+        logBox.append("\n" + text);
     }
 
     public void throwPressed (View view){
@@ -33,7 +45,7 @@ public class FightActivity extends AppCompatActivity{
     }
 
     public void dodgePressed (View view){
-
+        logEvent("lolololololol");
     }
 
     public void leapPressed (View view){
@@ -46,5 +58,9 @@ public class FightActivity extends AppCompatActivity{
 
     public void attackPressed (View view){
 
+    }
+
+    public void logPressed (View view){
+        // TODO: useless button
     }
 }
