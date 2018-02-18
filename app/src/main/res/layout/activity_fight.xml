@@ -51,7 +51,8 @@
                 android:text="Throw dirt"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="15dp"/>
+                android:layout_marginEnd="15dp"
+                android:onClick="throwPressed"/>
 
             <Button
                 android:id="@+id/dodgeButton"
@@ -60,7 +61,8 @@
                 android:text="Dodge"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:onClick="dodgePressed"/>
         </TableRow>
 
         <TableRow
@@ -75,7 +77,8 @@
                 android:text="Leap"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="15dp"/>
+                android:layout_marginEnd="15dp"
+                android:onClick="leapPressed"/>
 
             <Button
                 android:id="@+id/kickButton"
@@ -84,7 +87,8 @@
                 android:text="Kick"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:onClick="kickPressed"/>
         </TableRow>
 
         <TableRow
@@ -99,7 +103,8 @@
                 android:text="Help"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="15dp"/>
+                android:layout_marginEnd="15dp"
+                android:onClick="helpPressed"/>
 
             <Button
                 android:id="@+id/attackButton"
@@ -108,7 +113,8 @@
                 android:text="Attack"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:onClick="attackPressed"/>
         </TableRow>
 
     </TableLayout>
