@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class FightActivity extends AppCompatActivity{
 
     private ProgressBar mooseHpBar, playerHpBar;
     private static int mooseHp, playerHp;
     private static boolean ifAttack, ifKick, ifThrow, ifDodge, ifLeap = true;
+    public static final String OUTCOME_KEY = "outcome";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +37,17 @@ public class FightActivity extends AppCompatActivity{
         ((TextView) findViewById(R.id.logText)).setMovementMethod(new ScrollingMovementMethod());
     }
 
-    private void endgame (){
+    private void endgame (String outcome){
         Intent intent = new Intent(this, EndgameActivity.class);
+        intent.putExtra(OUTCOME_KEY, outcome);
+        intent.putExtra(PlayActivity.MOOSE_KEY, mooseHpBar.getMax());
+        intent.putExtra(PlayActivity.PLAYER_KEY, playerHpBar.getMax());
         startActivity(intent);
+        finish();
     }
 
     private void changeHealth (String target, int amount){
-        if (target == "moose") {
+        if (Objects.equals(target, "moose")) {
             mooseHp += amount;
             mooseHpBar.setProgress(mooseHp);
         }
@@ -48,7 +55,9 @@ public class FightActivity extends AppCompatActivity{
             playerHp += amount;
             playerHpBar.setProgress(playerHp);
         }
-        if (mooseHp <= 0 || playerHp <= 0) endgame();
+        if (mooseHp <= 0 && playerHp <= 0) endgame("tie");
+        else if (mooseHp <= 0) endgame("win");
+        else if (playerHp <= 0) endgame("loss");
     }
 
     private void logEvent (String text){
@@ -79,4 +88,6 @@ public class FightActivity extends AppCompatActivity{
     public void logPressed (View view){
         // TODO: useless button
     }
+
+    //TODO: handle back button
 }
