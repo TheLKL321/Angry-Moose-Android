@@ -25,7 +25,7 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager) findViewById(R.id.buttonPager);
+        mPager = findViewById(R.id.buttonPager);
         mPagerAdapter = new ButtonPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
     }

@@ -10,9 +10,7 @@ public class PagerButtonsFragment extends android.support.v4.app.Fragment {
 
     private int pageNumber;
 
-    /**
-     * Factory method for this fragment class. Constructs a new fragment for the given page number.
-     */
+    // Constructs a new fragment for the given page number.
     public static PagerButtonsFragment create(int pageNumber) {
         PagerButtonsFragment fragment = new PagerButtonsFragment();
         Bundle args = new Bundle();
