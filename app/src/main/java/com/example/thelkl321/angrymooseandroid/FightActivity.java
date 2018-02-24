@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class FightActivity extends AppCompatActivity{
 
-    private ProgressBar mooseHpBar;
-    private ProgressBar playerHpBar;
+    private ProgressBar mooseHpBar, playerHpBar;
+    private static int mooseHp, playerHp;
+    private static boolean ifAttack, ifKick, ifThrow, ifDodge, ifLeap = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +21,8 @@ public class FightActivity extends AppCompatActivity{
 
         // Get difficulty info
         Intent intent = getIntent();
-        int mooseHp = intent.getIntExtra(PlayActivity.MOOSE_KEY, 0);
-        int playerHp = intent.getIntExtra(PlayActivity.PLAYER_KEY, 0);
+        mooseHp = intent.getIntExtra(PlayActivity.MOOSE_KEY, 0);
+        playerHp = intent.getIntExtra(PlayActivity.PLAYER_KEY, 0);
 
         // Apply difficulty info
         mooseHpBar = findViewById(R.id.mooseHealthBar);
@@ -35,13 +34,30 @@ public class FightActivity extends AppCompatActivity{
         ((TextView) findViewById(R.id.logText)).setMovementMethod(new ScrollingMovementMethod());
     }
 
-    private void logEvent(String text){
+    private void endgame (){
+        Intent intent = new Intent(this, EndgameActivity.class);
+        startActivity(intent);
+    }
+
+    private void changeHealth (String target, int amount){
+        if (target == "moose") {
+            mooseHp += amount;
+            mooseHpBar.setProgress(mooseHp);
+        }
+        else {
+            playerHp += amount;
+            playerHpBar.setProgress(playerHp);
+        }
+        if (mooseHp <= 0 || playerHp <= 0) endgame();
+    }
+
+    private void logEvent (String text){
         TextView logBox = findViewById(R.id.logText);
         logBox.append("\n" + text);
     }
 
     public void throwPressed (View view){
-        mooseHpBar.setProgress(mooseHpBar.getProgress() - 3);
+        changeHealth("moose",-3);
     }
 
     public void dodgePressed (View view){
@@ -49,7 +65,7 @@ public class FightActivity extends AppCompatActivity{
     }
 
     public void leapPressed (View view){
-
+        changeHealth("player", -3);
     }
 
     public void kickPressed (View view){

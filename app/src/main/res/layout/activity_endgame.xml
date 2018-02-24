@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/outcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="YOU LOST"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="70dp"
+        android:textStyle="bold"
+        android:layout_weight="5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="5">
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fight again" />
+
+        <Button
+            android:id="@+id/shareButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Share" />
+
+        <Button
+            android:id="@+id/menuButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Main menu" />
+    </LinearLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

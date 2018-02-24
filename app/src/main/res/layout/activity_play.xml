@@ -18,49 +18,6 @@
         android:textSize="70sp"
         android:textStyle="bold" />
 
-    <!--
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="0dip"
-        android:layout_weight="10">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/easyButton"
-                android:layout_width="350dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="Easy Difficulty" />
-
-            <ImageButton
-                android:id="@+id/normalButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="Normal Difficulty" />
-
-            <ImageButton
-                android:id="@+id/hardButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="Hard Difficulty"/>
-
-            <ImageButton
-                android:id="@+id/impossibleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="Impossible Difficulty"/>
-
-        </LinearLayout>
-    </HorizontalScrollView>
-    -->
-
     <!-- TODO: page indicator?
          TODO: get rid of white ripple on edge -->
     <android.support.v4.view.ViewPager

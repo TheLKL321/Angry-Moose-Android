@@ -29,6 +29,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         android:progress="100" />
 
+    <!-- TODO: small scrollbar-->
     <TextView
         android:id="@+id/logText"
         android:layout_width="0dp"
