@@ -14,15 +14,26 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/colorText"
-        android:textSize="70dp"
+        android:textSize="70sp"
         android:textStyle="bold"
         android:layout_weight="5"/>
+
+    <TextView
+        android:id="@+id/turnText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You survived X turns"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="30sp"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="5"
+        android:layout_weight="8"
         android:paddingTop="70dp"
         android:paddingBottom="70dp">
 
