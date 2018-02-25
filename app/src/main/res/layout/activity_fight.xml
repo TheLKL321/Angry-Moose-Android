@@ -59,25 +59,25 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/eventButton"
+                android:id="@+id/attackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Event Log"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
-                android:onClick="logPressed"
-                android:layout_gravity="bottom"/>
+                android:layout_gravity="bottom"
+                android:text="Attack "
+                android:onClick="attackPressed"/>
 
             <Button
-                android:id="@+id/dodgeButton"
+                android:id="@+id/kickButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dodge"
+                android:text="Kick "
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
-                android:onClick="dodgePressed"
+                android:onClick="kickPressed"
                 android:layout_gravity="bottom"/>
         </TableRow>
 
@@ -90,7 +90,7 @@
                 android:id="@+id/leapButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leap"
+                android:text="Leap "
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
@@ -98,14 +98,14 @@
                 android:onClick="leapPressed"/>
 
             <Button
-                android:id="@+id/kickButton"
+                android:id="@+id/dodgeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kick"
+                android:text="Dodge "
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
-                android:onClick="kickPressed"
+                android:onClick="dodgePressed"
                 android:layout_gravity="center_vertical"/>
         </TableRow>
 
@@ -118,21 +118,20 @@
                 android:id="@+id/throwButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Throw dirt"
+                android:text="Throw dirt "
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
                 android:onClick="throwPressed"/>
 
             <Button
-                android:id="@+id/attackButton"
+                android:id="@+id/dummyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Attack"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
-                android:onClick="attackPressed"/>
+                android:visibility="invisible"/>
         </TableRow>
 
     </TableLayout>

@@ -2,15 +2,20 @@ package com.example.thelkl321.angrymooseandroid;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.thelkl321.angrymooseandroid.SurrenderDialogFragment.SurrenderDialogListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -22,7 +27,8 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     private ProgressBar mooseHpBar, playerHpBar;
     private TextView turnCounterText;
     private static int mooseHp, playerHp, turnCounter;
-    private static boolean ifAttack, ifKick, ifThrow, ifDodge, ifLeap = true;
+    private static HashMap<String, Integer> counters = new HashMap<>();
+    private static HashMap<String, Button> moveButtons = new HashMap<>();
     private static String mooseMove;
 
     @Override
@@ -46,8 +52,24 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         turnCounterText = findViewById(R.id.turnCounterText);
         turnCounterText.setText(String.valueOf(turnCounter));
 
+        // Assign move buttons
+        moveButtons.put("throw", (Button) findViewById(R.id.throwButton));
+        moveButtons.put("dodge", (Button) findViewById(R.id.dodgeButton));
+        moveButtons.put("leap", (Button) findViewById(R.id.leapButton));
+        moveButtons.put("kick", (Button) findViewById(R.id.kickButton));
+        moveButtons.put("attack", (Button) findViewById(R.id.attackButton));
+
+        // Start the move counters
+        for (String move :
+                new String[] {"throw", "dodge", "leap", "kick", "attack"}) {
+            counters.put(move, 0);
+        }
+
         // Create scrollable log
         ((TextView) findViewById(R.id.logText)).setMovementMethod(new ScrollingMovementMethod());
+
+        // First turn
+        mooseTurn();
     }
 
     private void endgame (String outcome){
@@ -71,10 +93,40 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         }
     }
 
+    // TEMPORARY
+    private static void disable (String move, int duration){
+        counters.put(move, counters.get(move) + duration);
+        Button button = moveButtons.get(move);
+
+        for (int i = 0; i < duration; i++){
+            String text = String.valueOf(button.getText());
+            button.setText(text + "X");
+        }
+        button.setClickable(false);
+    }
+
+    // TEMPORARY
+    private static void enable (String move){
+        Button button = moveButtons.get(move);
+        String text = String.valueOf(button.getText());
+        String ttext = text.substring(0, text.length() - 1);
+        button.setText(ttext);
+        button.setClickable(true);
+    }
+
     private void checkEndgame (){
         if (mooseHp <= 0 && playerHp <= 0) endgame("tie");
         else if (mooseHp <= 0) endgame("win");
         else if (playerHp <= 0) endgame("loss");
+    }
+
+    private static void checkCounters(){
+        for (String move : counters.keySet()) {
+            if (counters.get(move) == 1){
+                counters.put(move, 0);
+                enable(move);
+            }
+        }
     }
 
     private static int random() {
@@ -84,6 +136,17 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     private void updateTurns (){
         turnCounter++;
         turnCounterText.setText(String.valueOf(turnCounter));
+        checkCounters();
+        for (String move : counters.keySet()) {
+            int count = counters.get(move);
+            if (count > 1) {
+                counters.put(move, count - 1);
+                Button button = moveButtons.get(move);
+                String text = String.valueOf(button.getText());
+                String ttext = text.substring(0, text.length() - 1);
+                button.setText(ttext);
+            }
+        }
     }
 
     // TODO: commentary
@@ -91,23 +154,32 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         int number = random();
         if (number < 17) {
             mooseMove = "lower head";
-            logEvent("The moose lowers his head");
+            logEvent("lower head");
         }
         else if (number < 34) {
             mooseMove = "roar";
-            logEvent("The beast ");
+            logEvent("roar");
         }
         else if (number < 51) {
             mooseMove = "step back";
-
+            logEvent("step back");
         }
-        else if (number < 68) mooseMove = "eat";
-        else if (number < 85) mooseMove = "pick up";
+        else if (number < 68) {
+            mooseMove = "eat";
+            logEvent("eat");
+        }
+        else if (number < 85){
+            mooseMove = "pick up";
+            logEvent("pick up");
+        }
         else mooseMove = "turn around";
     }
 
     //TODO: commentary
     private void finishTurn (String playerMove){
+
+        updateTurns();
+
         switch (mooseMove){
             case "lower head":
                 switch (playerMove){
@@ -118,12 +190,18 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                         break;
 
                     case "leap":
+                        changeHealth("player", -1);
+                        logEvent("player -1");
                         break;
 
                     case "kick":
+                        changeHealth("moose", -1);
+                        logEvent("moose -1");
                         break;
 
                     case "attack":
+                        disable("throw", 2);
+                        logEvent("throw disabled");
                         break;
                 }
                 break;
@@ -137,12 +215,18 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                         break;
 
                     case "leap":
+                        changeHealth("player", -1);
+                        logEvent("player -1");
                         break;
 
                     case "kick":
+                        changeHealth("moose", -1);
+                        logEvent("moose -1");
                         break;
 
                     case "attack":
+                        disable("throw", 2);
+                        logEvent("throw disabled");
                         break;
                 }
                 break;
@@ -156,12 +240,18 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                         break;
 
                     case "leap":
+                        changeHealth("player", -1);
+                        logEvent("player -1");
                         break;
 
                     case "kick":
+                        changeHealth("moose", -1);
+                        logEvent("moose -1");
                         break;
 
                     case "attack":
+                        disable("throw", 2);
+                        logEvent("throw disabled");
                         break;
                 }
                 break;
@@ -175,12 +265,18 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                         break;
 
                     case "leap":
+                        changeHealth("player", -1);
+                        logEvent("player -1");
                         break;
 
                     case "kick":
+                        changeHealth("moose", -1);
+                        logEvent("moose -1");
                         break;
 
                     case "attack":
+                        disable("throw", 2);
+                        logEvent("throw disabled");
                         break;
                 }
                 break;
@@ -194,12 +290,18 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                         break;
 
                     case "leap":
+                        changeHealth("player", -1);
+                        logEvent("player -1");
                         break;
 
                     case "kick":
+                        changeHealth("moose", -1);
+                        logEvent("moose -1");
                         break;
 
                     case "attack":
+                        disable("throw", 2);
+                        logEvent("throw disabled");
                         break;
                 }
                 break;
@@ -213,12 +315,18 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                         break;
 
                     case "leap":
+                        changeHealth("player", -1);
+                        logEvent("player -1");
                         break;
 
                     case "kick":
+                        changeHealth("moose", -1);
+                        logEvent("moose -1");
                         break;
 
                     case "attack":
+                        disable("throw", 2);
+                        logEvent("throw disabled");
                         break;
                 }
                 break;
@@ -228,7 +336,6 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         }
 
         checkEndgame();
-        updateTurns();
         mooseTurn();
     }
 
@@ -255,10 +362,6 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
 
     public void attackPressed (View view){
         finishTurn("attack");
-    }
-
-    public void logPressed (View view){
-        // TODO: useless button
     }
 
     @Override
