@@ -2,8 +2,6 @@ package com.example.thelkl321.angrymooseandroid;
 
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.thelkl321.angrymooseandroid.SurrenderDialogFragment.SurrenderDialogListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;

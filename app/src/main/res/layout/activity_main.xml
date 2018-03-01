@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:theme="@style/AppTheme"
-    tools:context="com.example.thelkl321.angrymooseandroid.MainActivity">
+    tools:context="com.example.thelkl321.angrymooseandroid.MainActivity"
+    android:id="@+id/mainLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
