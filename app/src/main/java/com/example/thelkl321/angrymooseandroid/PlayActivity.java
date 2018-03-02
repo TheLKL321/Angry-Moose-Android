@@ -78,6 +78,8 @@ public class PlayActivity extends AppCompatActivity {
                 "Throw dirt - you grab a handful of earth to chuck it at the beast's eyes\n" +
                 "\n" +
                 "In the middle of the screen you'll find an event log. Use it to find out about mooses actions and their consequences\n" +
+                "Watch out! The beast can feast on wild berries to heal himself\n" +
+                "\n" +
                 "Good luck!");
     }
 

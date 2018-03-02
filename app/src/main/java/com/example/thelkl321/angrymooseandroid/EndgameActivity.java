@@ -11,6 +11,7 @@ public class EndgameActivity extends AppCompatActivity {
 
     private static int mooseHp, playerHp;
 
+    //TODO: include the last event
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
