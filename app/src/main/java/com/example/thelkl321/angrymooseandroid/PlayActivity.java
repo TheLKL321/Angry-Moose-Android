@@ -23,6 +23,7 @@ public class PlayActivity extends AppCompatActivity {
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private PopupWindow popupWindow;
+    private Point realSize = new Point(), size = new Point();
 
     public static final String MOOSE_KEY = "moose";
     public static final String PLAYER_KEY = "player";
@@ -39,10 +40,8 @@ public class PlayActivity extends AppCompatActivity {
 
         // Get display size
         Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        display.getRealSize(realSize);
 
         // Inflate credits popup layout
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -50,8 +49,8 @@ public class PlayActivity extends AppCompatActivity {
 
         // Set size of the credits popup
         popupWindow = new PopupWindow(popup);
-        popupWindow.setWidth(width - 100);
-        popupWindow.setHeight(height - 100);
+        popupWindow.setWidth(size.x - 100);
+        popupWindow.setHeight(size.y - 100);
 
         // Set a listener for close popup button
         Button btn = popup.findViewById(R.id.closePopupButton);
@@ -63,20 +62,23 @@ public class PlayActivity extends AppCompatActivity {
         });
     }
 
-    // TODO: actual tutorial
     public void helpPressed (View view){
-        popupWindow.showAtLocation(findViewById(R.id.playLayout), Gravity.CENTER,0,0);
+
+        popupWindow.showAtLocation(findViewById(R.id.playLayout), Gravity.CENTER,0,(size.y - realSize.y)/2);
         TextView popupText = popupWindow.getContentView().findViewById(R.id.popupText);
-        popupText.setText("Lorem ipsum dolor sit amet, consectetur\n" +
-                "adipiscing elit. Nullam tempor mi vitae\n" +
-                "odio vulputate, nec egestas quam\n" +
-                "euismod. Sed sit amet urna justo. In elementum,\n" +
-                "nulla eu pharetra lobortis, sem nisi interdum\n" +
-                "ante, id luctus ex libero quis justo. Sed\n" +
-                "volutpat tincidunt augue ac lobortis. Vestibulum\n" +
-                "a lacinia nibh. Mauris porttitor massa ut aliquet\n" +
-                "sodales. Integer sit amet turpis scelerisque,\n" +
-                "ultrices ipsum et, volutpat mi.");
+        popupText.setText("Press a button to make your move.\n" +
+                "Your goal is to decrease the moose's\n" +
+                "health to 0 without dying yourself.\n" +
+                "\n" +
+                "Moves:\n" +
+                "Attack - you attempt to throw a punch\n" +
+                "Kick - you try to kick the moose\n" +
+                "Leap - you throw yourself on the floor to evade an attack\n" +
+                "Dodge - you step to the side, doing a light dodge\n" +
+                "Throw dirt - you grab a handful of earth to chuck it at the beast's eyes\n" +
+                "\n" +
+                "In the middle of the screen you'll find an event log. Use it to find out about mooses actions and their consequences\n" +
+                "Good luck!");
     }
 
     public void timePressed (View view){

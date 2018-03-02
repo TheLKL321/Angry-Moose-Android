@@ -1,5 +1,6 @@
 package com.example.thelkl321.angrymooseandroid;
 
+import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Point;
@@ -8,8 +9,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private static PopupWindow popupWindow;
+    Point realSize = new Point(), size = new Point();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get display size
         Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        display.getRealSize(realSize);
 
         // Inflate credits popup layout
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -38,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Set size of the credits popup
         popupWindow = new PopupWindow(popup);
-        popupWindow.setWidth(width - 100);
-        popupWindow.setHeight(height - 100);
+        popupWindow.setWidth(size.x - 100);
+        popupWindow.setHeight(size.y - 100);
 
         // Set a listener for close popup button
         Button btn = popup.findViewById(R.id.closePopupButton);
@@ -63,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Actual credits
     public void creditsPressed (View view){
-        popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0,0);
+
+        popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0, (size.y - realSize.y)/2);
         TextView popupText = popupWindow.getContentView().findViewById(R.id.popupText);
         popupText.setText("Lorem ipsum dolor sit amet, consectetur\n" +
                 "adipiscing elit. Nullam tempor mi vitae\n" +
