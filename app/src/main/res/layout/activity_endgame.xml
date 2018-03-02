@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/outcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PLACEHOLDER"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        android:layout_weight="5"/>
+
+    <TextView
+        android:id="@+id/turnText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You survived X turns"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="30sp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="8"
+        android:paddingTop="70dp"
+        android:paddingBottom="70dp">
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fight again"
+            android:onClick="retryPressed"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <Button
+            android:id="@+id/shareButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Share"
+            android:onClick="sharePressed"/>
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Back to Play"
+            android:onClick="backPressed"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+    </LinearLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>
