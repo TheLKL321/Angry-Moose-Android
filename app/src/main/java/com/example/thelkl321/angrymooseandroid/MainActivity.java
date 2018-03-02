@@ -1,5 +1,6 @@
 package com.example.thelkl321.angrymooseandroid;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //TODO: Actual credits
     public void creditsPressed (View view){
         popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0,0);
         TextView popupText = popupWindow.getContentView().findViewById(R.id.popupText);
@@ -73,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 "a lacinia nibh. Mauris porttitor massa ut aliquet\n" +
                 "sodales. Integer sit amet turpis scelerisque,\n" +
                 "ultrices ipsum et, volutpat mi.");
+    }
+
+    // Close the popup on back press
+    @Override
+    public void onBackPressed (){
+        if (popupWindow.isShowing()){
+            popupWindow.dismiss();
+        }
+        else finish();
     }
 
     public void closePopup (View view){
