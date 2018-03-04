@@ -3,6 +3,9 @@ package com.example.thelkl321.angrymooseandroid;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -18,15 +21,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class FightActivity extends AppCompatActivity implements SurrenderDialogListener{
 
-    public static final String TURN_COUNTER_KEY = "turn";
-    public static final String OUTCOME_KEY = "outcome";
-
     private ProgressBar mooseHpBar, playerHpBar;
-    private TextView turnCounterText;
-    private static int mooseHp, playerHp, turnCounter;
+    private TextView turnCounterText, eventLog;
+    private static int mooseHp, startingMooseHp, playerHp, startingPlayerHp, turnCounter;
     private static HashMap<String, Integer> counters = new HashMap<>();
     private static HashMap<String, Button> moveButtons = new HashMap<>();
     private static String mooseMove;
+
+    private FragmentManager fm;
+    private EndgameFragment endgameFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +38,15 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
 
         // Get difficulty info
         Intent intent = getIntent();
-        mooseHp = intent.getIntExtra(MainActivity.MOOSE_KEY, 0);
-        playerHp = intent.getIntExtra(MainActivity.PLAYER_KEY, 0);
+        startingMooseHp = intent.getIntExtra(MainActivity.MOOSE_KEY, 0);
+        startingPlayerHp = intent.getIntExtra(MainActivity.PLAYER_KEY, 0);
 
-        // Apply difficulty info
+        // Assign views
         mooseHpBar = findViewById(R.id.mooseHealthBar);
+        mooseHpBar.setMax(startingMooseHp);
         playerHpBar = findViewById(R.id.playerHealthBar);
-        mooseHpBar.setMax(mooseHp);
-        playerHpBar.setMax(playerHp);
-
-        // Assign turn counter
-        turnCounter = 1;
+        playerHpBar.setMax(startingPlayerHp);
         turnCounterText = findViewById(R.id.turnCounterText);
-        turnCounterText.setText(String.valueOf(turnCounter));
 
         // Assign move buttons
         moveButtons.put("throw", (Button) findViewById(R.id.throwButton));
@@ -56,14 +55,39 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         moveButtons.put("kick", (Button) findViewById(R.id.kickButton));
         moveButtons.put("attack", (Button) findViewById(R.id.attackButton));
 
+        // Create scrollable log
+        eventLog = findViewById(R.id.logText);
+        eventLog.setMovementMethod(new ScrollingMovementMethod());
+
+        // Assign the fragment and hide it
+        fm = getSupportFragmentManager();
+        endgameFragment = (EndgameFragment) fm.findFragmentById(R.id.endgameFragment);
+        hideFragment(endgameFragment);
+
+        startgame();
+    }
+
+    private void startgame (){
+
+        // Apply difficulty info
+        mooseHp = startingMooseHp;
+        playerHp = startingPlayerHp;
+        mooseHpBar.setProgress(mooseHp);
+        playerHpBar.setProgress(playerHp);
+
+        // Assign turn counter
+        turnCounter = 1;
+        turnCounterText = findViewById(R.id.turnCounterText);
+        turnCounterText.setText(String.valueOf(turnCounter));
+
         // Start the move counters
         for (String move :
                 new String[] {"throw", "dodge", "leap", "kick", "attack"}) {
             counters.put(move, 0);
         }
 
-        // Create scrollable log
-        ((TextView) findViewById(R.id.logText)).setMovementMethod(new ScrollingMovementMethod());
+        // Clear the log
+        eventLog.setText("");
 
         // First turn
         logEvent("A huge moose stands in front of you");
@@ -71,13 +95,8 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     }
 
     private void endgame (String outcome){
-        Intent intent = new Intent(this, EndgameActivity.class);
-        intent.putExtra(OUTCOME_KEY, outcome);
-        intent.putExtra(MainActivity.MOOSE_KEY, mooseHpBar.getMax());
-        intent.putExtra(MainActivity.PLAYER_KEY, playerHpBar.getMax());
-        intent.putExtra(TURN_COUNTER_KEY, turnCounter);
-        startActivity(intent);
-        finish();
+        endgameFragment.setValues(outcome, turnCounter - 1);
+        showFragment(endgameFragment);
     }
 
     private void changeHealth (String target, int amount){
@@ -117,9 +136,11 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     }
 
     private void checkEndgame (){
-        if (mooseHp <= 0 && playerHp <= 0) endgame("tie");
-        else if (mooseHp <= 0) endgame("win");
-        else if (playerHp <= 0) endgame("loss");
+        if (mooseHp <= 0 || playerHp <= 0) {
+            if (mooseHp >= 0) endgame("loss");
+            else if (playerHp >= 0) endgame("win");
+            else endgame("tie");
+        }
     }
 
     private static void checkCounters(){
@@ -179,7 +200,6 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         }
     }
 
-    //TODO: commentary
     private void finishTurn (String playerMove){
 
         updateTurns();
@@ -625,6 +645,37 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         finishTurn("attack");
     }
 
+    public void backPressed (View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void retryPressed (View view){
+        startgame();
+        hideFragment(endgameFragment);
+    }
+
+    public void sharePressed (View view){
+        //TODO: social media integration
+    }
+
+    public void hideFragment (Fragment fragment){
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.hide(fragment);
+        transaction.commit();
+    }
+
+    public void showFragment (Fragment fragment){
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.show(fragment);
+        transaction.commit();
+    }
+
+    public int getTurnCounter(){
+        return turnCounter;
+    }
+
     @Override
     public void onBackPressed (){
         DialogFragment dialog = new SurrenderDialogFragment();
@@ -633,7 +684,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        endgame("loss");
+        endgame("surrender");
     }
 
     @Override

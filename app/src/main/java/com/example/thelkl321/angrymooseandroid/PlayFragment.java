@@ -51,4 +51,5 @@ public class PlayFragment extends Fragment {
     public int getPageNumber (){
         return mPager.getCurrentItem();
     }
+
 }

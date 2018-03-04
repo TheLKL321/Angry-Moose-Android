@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Assign the fragments and hide them
-        playFragment = (PlayFragment) getSupportFragmentManager().findFragmentById(R.id.playFragment);
-        optionsFragment = (OptionsFragment) getSupportFragmentManager().findFragmentById(R.id.optionsFragment);
         fm = getSupportFragmentManager();
+        playFragment = (PlayFragment) fm.findFragmentById(R.id.playFragment);
+        optionsFragment = (OptionsFragment) fm.findFragmentById(R.id.optionsFragment);
         hideFragment(playFragment);
         hideFragment(optionsFragment);
     }
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void hideFragment (Fragment fragment){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = fm.beginTransaction();
         transaction.hide(fragment);
         transaction.commit();
     }

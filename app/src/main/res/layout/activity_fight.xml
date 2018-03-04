@@ -174,4 +174,11 @@
         android:textSize="30sp"
         android:textStyle="bold"/>
 
+    <fragment
+        android:name="com.example.thelkl321.angrymooseandroid.EndgameFragment"
+        android:id="@+id/endgameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
 </android.support.constraint.ConstraintLayout>
