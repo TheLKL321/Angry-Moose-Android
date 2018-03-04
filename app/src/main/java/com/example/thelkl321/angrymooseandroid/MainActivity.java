@@ -1,26 +1,28 @@
 package com.example.thelkl321.angrymooseandroid;
 
-import android.app.ActionBar;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Point;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MOOSE_KEY = "moose";
+    public static final String PLAYER_KEY = "player";
+
+    private PlayFragment playFragment;
+    private OptionsFragment optionsFragment;
+    private FragmentManager fm;
 
     private static PopupWindow popupWindow;
     Point realSize = new Point(), size = new Point();
@@ -52,24 +54,26 @@ public class MainActivity extends AppCompatActivity {
                 popupWindow.dismiss();
             }
         });
+
+        // Assign the fragments and hide them
+        playFragment = (PlayFragment) getSupportFragmentManager().findFragmentById(R.id.playFragment);
+        optionsFragment = (OptionsFragment) getSupportFragmentManager().findFragmentById(R.id.optionsFragment);
+        fm = getSupportFragmentManager();
+        hideFragment(playFragment);
+        hideFragment(optionsFragment);
     }
 
     public void playPressed (View view){
-        Intent intent = new Intent(this, PlayActivity.class);
-        startActivity(intent);
+        showFragment(playFragment);
     }
 
     public void optionsPressed (View view){
-        Intent intent = new Intent(this, OptionsActivity.class);
-        startActivity(intent);
+        showFragment(optionsFragment);
     }
 
-    //TODO: Actual credits
+    //TODO: Actual credits and extract string
     public void creditsPressed (View view){
-
-        popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0, (size.y - realSize.y)/2);
-        TextView popupText = popupWindow.getContentView().findViewById(R.id.popupText);
-        popupText.setText("Lorem ipsum dolor sit amet, consectetur\n" +
+        showPopup("Lorem ipsum dolor sit amet, consectetur\n" +
                 "adipiscing elit. Nullam tempor mi vitae\n" +
                 "odio vulputate, nec egestas quam\n" +
                 "euismod. Sed sit amet urna justo. In elementum,\n" +
@@ -81,17 +85,96 @@ public class MainActivity extends AppCompatActivity {
                 "ultrices ipsum et, volutpat mi.");
     }
 
+    // TODO: extract string
+    public void helpPressed (View view){
+        showPopup("Press a button to make your move.\n" +
+                "Your goal is to decrease the moose's\n" +
+                "health to 0 without dying yourself.\n" +
+                "\n" +
+                "Moves:\n" +
+                "Attack - you attempt to throw a punch\n" +
+                "Kick - you try to kick the moose\n" +
+                "Leap - you throw yourself on the floor to evade an attack\n" +
+                "Dodge - you step to the side, doing a light dodge\n" +
+                "Throw dirt - you grab a handful of earth to chuck it at the beast's eyes\n" +
+                "\n" +
+                "In the middle of the screen you'll find an event log. Use it to find out about mooses actions and their consequences\n" +
+                "Watch out! The beast can feast on wild berries to heal himself\n" +
+                "\n" +
+                "Good luck!");
+    }
+
+    public void timePressed (View view){
+        // TODO: new gamemode
+    }
+
+    public void difficultyPressed (View view){
+
+        int mooseHp, playerHp;
+        switch (playFragment.getPageNumber()) {
+            case 0:
+                mooseHp = 15;
+                playerHp = 15;
+                break;
+
+            case 1:
+                mooseHp = 20;
+                playerHp = 10;
+                break;
+
+            case 2:
+                mooseHp = 30;
+                playerHp = 10;
+                break;
+
+            case 3:
+                mooseHp = 30;
+                playerHp = 2;
+                break;
+
+            default:
+                throw new NullPointerException();
+        }
+
+        Intent intent = new Intent(this, FightActivity.class);
+        intent.putExtra(MOOSE_KEY, mooseHp);
+        intent.putExtra(PLAYER_KEY, playerHp);
+        startActivity(intent);
+    }
+
     // Close the popup on back press
     @Override
     public void onBackPressed (){
         if (popupWindow.isShowing()){
             popupWindow.dismiss();
+        } else if (playFragment.isVisible()){
+            hideFragment(playFragment);
+        } else if (optionsFragment.isVisible()){
+            hideFragment(optionsFragment);
         }
         else finish();
     }
 
+    public void hideFragment (Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(fragment);
+        transaction.commit();
+    }
+
+    public void showFragment (Fragment fragment){
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.show(fragment);
+        transaction.commit();
+    }
+
     public void closePopup (View view){
         popupWindow.dismiss();
+    }
+
+    public void showPopup (String text){
+        popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0, (size.y - realSize.y)/2);
+        TextView popupText = popupWindow.getContentView().findViewById(R.id.popupText);
+        popupText.setText(text);
     }
 
     public void exitPressed (View view){

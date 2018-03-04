@@ -20,8 +20,8 @@ public class EndgameActivity extends AppCompatActivity {
         // Extract data
         Intent intent = getIntent();
         String outcome = intent.getStringExtra(FightActivity.OUTCOME_KEY);
-        mooseHp = intent.getIntExtra(PlayActivity.MOOSE_KEY, 0);
-        playerHp = intent.getIntExtra(PlayActivity.PLAYER_KEY, 0);
+        mooseHp = intent.getIntExtra(MainActivity.MOOSE_KEY, 0);
+        playerHp = intent.getIntExtra(MainActivity.PLAYER_KEY, 0);
         int turnCounter = intent.getIntExtra(FightActivity.TURN_COUNTER_KEY, 0);
 
         // Set outcome
@@ -55,8 +55,8 @@ public class EndgameActivity extends AppCompatActivity {
 
     public void retryPressed (View view){
         Intent intent = new Intent(this, FightActivity.class);
-        intent.putExtra(PlayActivity.MOOSE_KEY, mooseHp);
-        intent.putExtra(PlayActivity.PLAYER_KEY, playerHp);
+        intent.putExtra(MainActivity.MOOSE_KEY, mooseHp);
+        intent.putExtra(MainActivity.PLAYER_KEY, playerHp);
         startActivity(intent);
         finish();
     }

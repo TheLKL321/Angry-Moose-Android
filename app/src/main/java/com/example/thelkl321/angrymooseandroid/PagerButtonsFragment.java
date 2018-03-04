@@ -1,12 +1,13 @@
 package com.example.thelkl321.angrymooseandroid;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-public class PagerButtonsFragment extends android.support.v4.app.Fragment {
+public class PagerButtonsFragment extends Fragment {
 
     private int pageNumber;
 

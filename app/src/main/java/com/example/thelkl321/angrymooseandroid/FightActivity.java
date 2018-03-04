@@ -35,8 +35,8 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
 
         // Get difficulty info
         Intent intent = getIntent();
-        mooseHp = intent.getIntExtra(PlayActivity.MOOSE_KEY, 0);
-        playerHp = intent.getIntExtra(PlayActivity.PLAYER_KEY, 0);
+        mooseHp = intent.getIntExtra(MainActivity.MOOSE_KEY, 0);
+        playerHp = intent.getIntExtra(MainActivity.PLAYER_KEY, 0);
 
         // Apply difficulty info
         mooseHpBar = findViewById(R.id.mooseHealthBar);
@@ -73,8 +73,8 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     private void endgame (String outcome){
         Intent intent = new Intent(this, EndgameActivity.class);
         intent.putExtra(OUTCOME_KEY, outcome);
-        intent.putExtra(PlayActivity.MOOSE_KEY, mooseHpBar.getMax());
-        intent.putExtra(PlayActivity.PLAYER_KEY, playerHpBar.getMax());
+        intent.putExtra(MainActivity.MOOSE_KEY, mooseHpBar.getMax());
+        intent.putExtra(MainActivity.PLAYER_KEY, playerHpBar.getMax());
         intent.putExtra(TURN_COUNTER_KEY, turnCounter);
         startActivity(intent);
         finish();
