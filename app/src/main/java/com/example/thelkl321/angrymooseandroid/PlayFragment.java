@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 public class PlayFragment extends Fragment {
 
     private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,14 +25,14 @@ public class PlayFragment extends Fragment {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = getView().findViewById(R.id.buttonPager);
-        mPagerAdapter = new ButtonPagerAdapter(getFragmentManager());
+        PagerAdapter mPagerAdapter = new ButtonPagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
     }
 
     // Adapter for buttonPager
     private class ButtonPagerAdapter extends FragmentStatePagerAdapter {
 
-        public ButtonPagerAdapter(FragmentManager fm) {
+        ButtonPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

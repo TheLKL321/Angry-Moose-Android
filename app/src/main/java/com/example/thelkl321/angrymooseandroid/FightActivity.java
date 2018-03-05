@@ -26,7 +26,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     private static int mooseHp, startingMooseHp, playerHp, startingPlayerHp, turnCounter;
     private static HashMap<String, Integer> counters = new HashMap<>();
     private static HashMap<String, Button> moveButtons = new HashMap<>();
-    private static String mooseMove;
+    private static String mooseMove, lastEvent;
 
     private FragmentManager fm;
     private EndgameFragment endgameFragment;
@@ -82,23 +82,23 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
 
         // Clear any disabilities
         Button button = moveButtons.get("throw");
-        button.setText("Throw dirt");
+        button.setText("Throw dirt ");
         button.setClickable(true);
 
         button = moveButtons.get("dodge");
-        button.setText("Dodge");
+        button.setText("Dodge ");
         button.setClickable(true);
 
         button = moveButtons.get("leap");
-        button.setText("Leap");
+        button.setText("Leap ");
         button.setClickable(true);
 
         button = moveButtons.get("kick");
-        button.setText("Kick");
+        button.setText("Kick ");
         button.setClickable(true);
 
         button = moveButtons.get("attack");
-        button.setText("Attack");
+        button.setText("Attack ");
         button.setClickable(true);
 
         // Start the move counters
@@ -116,7 +116,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     }
 
     private void endgame (String outcome){
-        endgameFragment.setValues(outcome, turnCounter - 1);
+        endgameFragment.setValues(outcome, lastEvent, turnCounter - 1);
         showFragment(endgameFragment);
     }
 
@@ -494,7 +494,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
                     case "throw":
                         if (number <= 30){
                             changeHealth("moose", -1);
-                            logEvent("Confuzed moose hits his head on a branch");
+                            logEvent("Confused moose hits his head on a branch");
                         } else if (number <= 60){
                             disable("attack", 1);
                             disable("throw", 1);
@@ -644,6 +644,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     private void logEvent (String text){
         TextView logBox = findViewById(R.id.logText);
         logBox.append("\n" + text);
+        lastEvent = text;
     }
 
     public void throwPressed (View view){
@@ -691,10 +692,6 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.show(fragment);
         transaction.commit();
-    }
-
-    public int getTurnCounter(){
-        return turnCounter;
     }
 
     @Override
