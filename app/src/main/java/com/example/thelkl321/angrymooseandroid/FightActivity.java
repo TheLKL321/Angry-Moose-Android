@@ -80,6 +80,27 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         turnCounterText = findViewById(R.id.turnCounterText);
         turnCounterText.setText(String.valueOf(turnCounter));
 
+        // Clear any disabilities
+        Button button = moveButtons.get("throw");
+        button.setText("Throw dirt");
+        button.setClickable(true);
+
+        button = moveButtons.get("dodge");
+        button.setText("Dodge");
+        button.setClickable(true);
+
+        button = moveButtons.get("leap");
+        button.setText("Leap");
+        button.setClickable(true);
+
+        button = moveButtons.get("kick");
+        button.setText("Kick");
+        button.setClickable(true);
+
+        button = moveButtons.get("attack");
+        button.setText("Attack");
+        button.setClickable(true);
+
         // Start the move counters
         for (String move :
                 new String[] {"throw", "dodge", "leap", "kick", "attack"}) {
@@ -678,8 +699,11 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
 
     @Override
     public void onBackPressed (){
-        DialogFragment dialog = new SurrenderDialogFragment();
-        dialog.show(getFragmentManager(), "surrender");
+        if (endgameFragment.isVisible()) finish();
+        else {
+            DialogFragment dialog = new SurrenderDialogFragment();
+            dialog.show(getFragmentManager(), "surrender");
+        }
     }
 
     @Override
