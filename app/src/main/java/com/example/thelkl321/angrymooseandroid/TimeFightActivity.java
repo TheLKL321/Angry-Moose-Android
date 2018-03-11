@@ -5,15 +5,15 @@ import android.os.CountDownTimer;
 public class TimeFightActivity extends FightActivity {
 
     CountDownTimer countdown;
-    int currentTime;
+    double currentTime;
 
     private void timeGamemode (int time){
         currentTime = time;
-        countdown = new CountDownTimer(time * 1000, 1000) {
+        countdown = new CountDownTimer(time * 1000, 250) {
             @Override
             public void onTick(long millisUntilFinished) {
-                middleText.setText(String.valueOf(millisUntilFinished / 1000));
-                currentTime--;
+                middleText.setText(String.valueOf((int) Math.ceil(currentTime)));
+                currentTime -= 0.25;
             }
 
             @Override
@@ -30,11 +30,6 @@ public class TimeFightActivity extends FightActivity {
     }
 
     @Override
-    void gamemodeCreation() {
-
-    }
-
-    @Override
     void startgame(){
         applyDifficulty();
         clearDisabilities();
@@ -47,10 +42,11 @@ public class TimeFightActivity extends FightActivity {
         mooseTurn();
     }
 
+    // TODO: different text for running out of time
     @Override
     void endgame(String outcome){
         countdown.cancel();
-        endgameFragment.setValues(outcome, lastEvent, currentTime);
+        endgameFragment.setValues(outcome, lastEvent, (int) currentTime);
         showFragment(endgameFragment);
     }
 }

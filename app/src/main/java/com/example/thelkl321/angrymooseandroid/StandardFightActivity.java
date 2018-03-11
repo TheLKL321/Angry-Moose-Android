@@ -10,11 +10,6 @@ public class StandardFightActivity extends FightActivity {
     }
 
     @Override
-    void gamemodeCreation() {
-        // Do nothing TODO: OR SHOULD I?
-    }
-
-    @Override
     void startgame(){
         applyDifficulty();
         assignTurnCounter();

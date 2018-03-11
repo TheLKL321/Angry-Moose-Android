@@ -72,11 +72,8 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         endgameFragment = (EndgameFragment) fm.findFragmentById(R.id.endgameFragment);
         hideFragment(endgameFragment);
 
-        gamemodeCreation();
         startgame();
     }
-
-    abstract void gamemodeCreation();
 
     abstract void startgame();
 
