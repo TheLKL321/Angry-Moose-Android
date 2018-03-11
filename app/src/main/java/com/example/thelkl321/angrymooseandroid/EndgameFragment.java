@@ -30,7 +30,7 @@ public class EndgameFragment extends Fragment {
         String lossOneScoreText, lossMoreScoreText, winOneScoreText, winMoreScoreText;
         if (MainActivity.gamemode.equals(MainActivity.TIME_GAMEMODE)) {
             lossOneScoreText = "You had one second left";
-            lossMoreScoreText = "You had " + " seconds left";
+            lossMoreScoreText = "You had " + score + " seconds left";
             winOneScoreText = "You had one second left!";
             winMoreScoreText = lossMoreScoreText;
         } else {
