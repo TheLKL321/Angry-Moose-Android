@@ -26,6 +26,8 @@
         <activity android:name=".FightActivity"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".StandardFightActivity" />
+        <activity android:name=".TimeFightActivity" />
     </application>
 
 </manifest>

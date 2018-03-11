@@ -3,6 +3,7 @@ package com.example.thelkl321.angrymooseandroid;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,34 +20,41 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class FightActivity extends AppCompatActivity implements SurrenderDialogListener{
+public abstract class FightActivity extends AppCompatActivity implements SurrenderDialogListener{
 
     private ProgressBar mooseHpBar, playerHpBar;
-    private TextView turnCounterText, eventLog;
-    private static int mooseHp, startingMooseHp, playerHp, startingPlayerHp, turnCounter;
+    TextView middleText;
+    TextView eventLog;
+    private static int mooseHp;
+    private static int startingMooseHp;
+    private static int playerHp;
+    private static int startingPlayerHp;
+    static int turnCounter, time;
     private static HashMap<String, Integer> counters = new HashMap<>();
     private static HashMap<String, Button> moveButtons = new HashMap<>();
-    private static String mooseMove, lastEvent;
+    private static String mooseMove;
+    static String lastEvent;
 
     private FragmentManager fm;
-    private EndgameFragment endgameFragment;
+    EndgameFragment endgameFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight);
 
-        // Get difficulty info
+        // Get difficulty and gamemode info
         Intent intent = getIntent();
         startingMooseHp = intent.getIntExtra(MainActivity.MOOSE_KEY, 0);
         startingPlayerHp = intent.getIntExtra(MainActivity.PLAYER_KEY, 0);
+        time = intent.getIntExtra(MainActivity.TIME_KEY, 0);
 
         // Assign views
         mooseHpBar = findViewById(R.id.mooseHealthBar);
         mooseHpBar.setMax(startingMooseHp);
         playerHpBar = findViewById(R.id.playerHealthBar);
         playerHpBar.setMax(startingPlayerHp);
-        turnCounterText = findViewById(R.id.turnCounterText);
+        middleText = findViewById(R.id.middleText);
 
         // Assign move buttons
         moveButtons.put("throw", (Button) findViewById(R.id.throwButton));
@@ -64,23 +72,15 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         endgameFragment = (EndgameFragment) fm.findFragmentById(R.id.endgameFragment);
         hideFragment(endgameFragment);
 
+        gamemodeCreation();
         startgame();
     }
 
-    private void startgame (){
+    abstract void gamemodeCreation();
 
-        // Apply difficulty info
-        mooseHp = startingMooseHp;
-        playerHp = startingPlayerHp;
-        mooseHpBar.setProgress(mooseHp);
-        playerHpBar.setProgress(playerHp);
+    abstract void startgame();
 
-        // Assign turn counter
-        turnCounter = 1;
-        turnCounterText = findViewById(R.id.turnCounterText);
-        turnCounterText.setText(String.valueOf(turnCounter));
-
-        // Clear any disabilities
+    static void clearDisabilities(){
         Button button = moveButtons.get("throw");
         button.setText("Throw dirt ");
         button.setClickable(true);
@@ -100,25 +100,29 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         button = moveButtons.get("attack");
         button.setText("Attack ");
         button.setClickable(true);
+    }
 
-        // Start the move counters
+    void assignTurnCounter(){
+        turnCounter = 1;
+        middleText = findViewById(R.id.middleText);
+        middleText.setText(String.valueOf(turnCounter));
+    }
+
+    void applyDifficulty(){
+        mooseHp = startingMooseHp;
+        playerHp = startingPlayerHp;
+        mooseHpBar.setProgress(mooseHp);
+        playerHpBar.setProgress(playerHp);
+    }
+
+    void restartMoveCounters(){
         for (String move :
                 new String[] {"throw", "dodge", "leap", "kick", "attack"}) {
             counters.put(move, 0);
         }
-
-        // Clear the log
-        eventLog.setText("");
-
-        // First turn
-        logEvent("A huge moose stands in front of you");
-        mooseTurn();
     }
 
-    private void endgame (String outcome){
-        endgameFragment.setValues(outcome, lastEvent, turnCounter - 1);
-        showFragment(endgameFragment);
-    }
+    abstract void endgame(String outcome);
 
     private void changeHealth (String target, int amount){
         if (Objects.equals(target, "moose")) {
@@ -164,9 +168,16 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         }
     }
 
-    private static void checkCounters(){
+    static void updateCounters(){
         for (String move : counters.keySet()) {
-            if (counters.get(move) == 1){
+            int count = counters.get(move);
+            if (count > 1) {
+                counters.put(move, count - 1);
+                Button button = moveButtons.get(move);
+                String text = String.valueOf(button.getText());
+                String ttext = text.substring(0, text.length() - 1);
+                button.setText(ttext);
+            } else if (count == 1){
                 counters.put(move, 0);
                 enable(move);
             }
@@ -177,23 +188,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         return ThreadLocalRandom.current().nextInt(0, 100 + 1);
     }
 
-    private void updateTurns (){
-        turnCounter++;
-        turnCounterText.setText(String.valueOf(turnCounter));
-        checkCounters();
-        for (String move : counters.keySet()) {
-            int count = counters.get(move);
-            if (count > 1) {
-                counters.put(move, count - 1);
-                Button button = moveButtons.get(move);
-                String text = String.valueOf(button.getText());
-                String ttext = text.substring(0, text.length() - 1);
-                button.setText(ttext);
-            }
-        }
-    }
-
-    private void mooseTurn (){
+    void mooseTurn(){
         int number = random();
         if (number <= 17) {
             mooseMove = "lower head";
@@ -641,7 +636,7 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
         mooseTurn();
     }
 
-    private void logEvent (String text){
+    void logEvent(String text){
         TextView logBox = findViewById(R.id.logText);
         logBox.append("\n" + text);
         lastEvent = text;
@@ -712,4 +707,6 @@ public class FightActivity extends AppCompatActivity implements SurrenderDialogL
     public void onDialogNegativeClick(DialogFragment dialog) {
         //Do nothing
     }
+
+    protected abstract void updateTurns();
 }

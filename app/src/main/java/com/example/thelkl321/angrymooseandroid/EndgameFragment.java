@@ -9,48 +9,61 @@ import android.widget.TextView;
 
 public class EndgameFragment extends Fragment {
 
-    private TextView outcomeText, score, lastEventText;
+    private TextView outcomeText, scoreText, lastEventText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_endgame, container, false);
     }
 
-    //TODO: include the last event
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         // Assign views
         outcomeText = getView().findViewById(R.id.outcomeText);
-        score = getView().findViewById(R.id.turnText);
+        scoreText = getView().findViewById(R.id.turnText);
         lastEventText = getView().findViewById(R.id.lastEventText);
     }
 
-    public void setValues(String outcome, String lastEvent, int turnCounter){
+    public void setValues(String outcome, String lastEvent, int score){
+
+        String lossOneScoreText, lossMoreScoreText, winOneScoreText, winMoreScoreText;
+        if (MainActivity.gamemode.equals(MainActivity.TIME_GAMEMODE)) {
+            lossOneScoreText = "You had one second left";
+            lossMoreScoreText = "You had " + " seconds left";
+            winOneScoreText = "You had one second left!";
+            winMoreScoreText = lossMoreScoreText;
+        } else {
+            lossOneScoreText = "You survived one turn";
+            lossMoreScoreText = "You survived " + score + " turns";
+            winOneScoreText = "You won in one turn!";
+            winMoreScoreText = "You won in " + score + " turns";
+        }
+
 
         lastEventText.setText(lastEvent);
         switch (outcome){
             case "tie":
                 outcomeText.setText("IT'S A\nTIE");
-                if (turnCounter == 1) score.setText("You survived one turn");
-                else score.setText("You survived " + turnCounter + " turns");
+                if (score == 1) this.scoreText.setText(lossOneScoreText);
+                else this.scoreText.setText(lossMoreScoreText);
                 break;
 
             case "win":
                 outcomeText.setText("YOU\nWON");
-                if (turnCounter == 1) score.setText("You won in one turn!"); //that's not possible
-                else score.setText("You won in " + turnCounter + " turns");
+                if (score == 1) this.scoreText.setText(winOneScoreText); //that's not possible
+                else this.scoreText.setText(winMoreScoreText);
                 break;
 
             case "loss":
                 outcomeText.setText("YOU\nLOST");
-                if (turnCounter == 1) score.setText("You survived one turn");
-                else score.setText("You survived " + turnCounter + " turns");
+                if (score == 1) this.scoreText.setText(lossOneScoreText);
+                else this.scoreText.setText(lossMoreScoreText);
                 break;
 
             case "surrender":
                 outcomeText.setText("YOU\nLOST");
-                score.setText("You ran away like a baby");
+                this.scoreText.setText("You ran away like a baby");
                 lastEventText.setText("The moose will laugh about you with his friends");
                 break;
         }

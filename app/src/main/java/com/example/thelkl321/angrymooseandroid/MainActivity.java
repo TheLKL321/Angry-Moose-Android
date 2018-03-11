@@ -14,23 +14,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String MOOSE_KEY = "moose";
     public static final String PLAYER_KEY = "player";
+    public static final String TIME_KEY = "time";
+    public static final String STANDARD_GAMEMODE = "standard";
+    public static final String TIME_GAMEMODE = "time attack";
 
+    public static String gamemode;
     private PlayFragment playFragment;
     private OptionsFragment optionsFragment;
     private FragmentManager fm;
-
     private static PopupWindow popupWindow;
-    Point realSize = new Point(), size = new Point();
+    private Point realSize = new Point(), size = new Point();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gamemode = STANDARD_GAMEMODE;
 
         // Get display size
         Display display = getWindowManager().getDefaultDisplay();
@@ -104,42 +110,56 @@ public class MainActivity extends AppCompatActivity {
                 "Good luck!");
     }
 
-    public void timePressed (View view){
-        // TODO: new gamemode
-    }
-
     public void difficultyPressed (View view){
 
-        int mooseHp, playerHp;
+        int mooseHp, playerHp, time;
         switch (playFragment.getPageNumber()) {
             case 0:
                 mooseHp = 15;
                 playerHp = 15;
+                time = 60;
                 break;
 
             case 1:
                 mooseHp = 20;
                 playerHp = 10;
+                time = 45;
                 break;
 
             case 2:
                 mooseHp = 30;
                 playerHp = 10;
+                time = 30;
                 break;
 
             case 3:
                 mooseHp = 30;
                 playerHp = 2;
+                time = 15;
                 break;
 
             default:
                 throw new NullPointerException();
         }
 
-        Intent intent = new Intent(this, FightActivity.class);
+        Intent intent;
+        if (gamemode.equals(TIME_GAMEMODE)) {
+            intent = new Intent(this, TimeFightActivity.class);
+            intent.putExtra(TIME_KEY, time);
+        } else {
+            intent = new Intent(this, StandardFightActivity.class);
+        }
         intent.putExtra(MOOSE_KEY, mooseHp);
         intent.putExtra(PLAYER_KEY, playerHp);
         startActivity(intent);
+    }
+
+    public void timePressed (View view){
+        if (((ToggleButton) view).isChecked()){
+            gamemode = TIME_GAMEMODE;
+        } else {
+            gamemode = STANDARD_GAMEMODE;
+        }
     }
 
     // Close the popup on back press

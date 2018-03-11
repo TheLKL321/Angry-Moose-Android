@@ -48,11 +48,12 @@
             android:layout_marginBottom="20dp"
             android:onClick="helpPressed"/>
 
-        <Button
+        <ToggleButton
             android:id="@+id/timeButton"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:text="Time Attack"
+            android:textOn="Time Attack"
+            android:textOff="Time Attack"
             android:layout_weight="1"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="35dp"
