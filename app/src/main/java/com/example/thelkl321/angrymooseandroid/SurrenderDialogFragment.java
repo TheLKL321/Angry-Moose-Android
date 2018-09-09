@@ -10,8 +10,8 @@ import android.support.v7.app.AlertDialog;
 public class SurrenderDialogFragment extends DialogFragment {
 
     public interface SurrenderDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
-        public void onDialogNegativeClick(DialogFragment dialog);
+        void onDialogPositiveClick(DialogFragment dialog);
+        void onDialogNegativeClick(DialogFragment dialog);
     }
 
     SurrenderDialogListener mListener;

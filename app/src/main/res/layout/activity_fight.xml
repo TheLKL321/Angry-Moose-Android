@@ -162,7 +162,7 @@
         app:layout_constraintGuide_begin="400dp" />
 
     <TextView
-        android:id="@+id/turnCounterText"
+        android:id="@+id/middleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -173,5 +173,12 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold"/>
+
+    <fragment
+        android:name="com.example.thelkl321.angrymooseandroid.EndgameFragment"
+        android:id="@+id/endgameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </android.support.constraint.ConstraintLayout>

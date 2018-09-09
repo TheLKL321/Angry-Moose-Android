@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true">
 
 
     <TextView
         android:id="@+id/outcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PLACEHOLDER"
+        tools:text="YOU\nLOST"
         android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/colorText"
         android:textSize="70sp"
         android:textStyle="bold"
-        android:layout_weight="5"/>
+        android:layout_weight="2"/>
+
+    <TextView
+        android:id="@+id/lastEventText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Something terrible has happened and you won or lost or tied"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/turnText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You survived X turns"
+        tools:text="You survived X turns"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/colorText"
@@ -33,9 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="8"
-        android:paddingTop="70dp"
-        android:paddingBottom="70dp">
+        android:layout_weight="5"
+        android:paddingTop="45dp"
+        android:paddingBottom="45dp">
 
         <Button
             android:id="@+id/retryButton"
