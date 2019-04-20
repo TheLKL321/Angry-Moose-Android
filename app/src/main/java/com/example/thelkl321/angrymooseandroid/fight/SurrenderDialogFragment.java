@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
+import com.example.thelkl321.angrymooseandroid.R;
+
 import java.util.Objects;
 
 public class SurrenderDialogFragment extends DialogFragment {
@@ -42,13 +44,13 @@ public class SurrenderDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
-        builder.setMessage("Do you want to give up?")
-                .setPositiveButton("Surrender to a moose", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.surrender_question)
+                .setPositiveButton(R.string.surrender_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogPositiveClick(SurrenderDialogFragment.this);
                     }
                 })
-                .setNegativeButton("Keep fighting!", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.surrender_no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogNegativeClick(SurrenderDialogFragment.this);
                     }

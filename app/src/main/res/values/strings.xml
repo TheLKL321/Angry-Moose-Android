@@ -38,10 +38,10 @@
     <string name="roar_attack_1">You land a punch before the animal attacks</string>
     <string name="roar_attack_2">You both miss and stare at each other confused</string>
     <string name="roar_attack_3">Your hand gets stuck in antlers</string>
-    <string name="step_back_throw_1">You throw some dirt at the moose. It\'s not very effective...</string>
+    <string name="step_back_throw_1">You throw some dirt at the moose. It\'s not very effective…</string>
     <string name="step_back_throw_2">Thanks to the defensive position, the moose foresaw your move</string>
     <string name="step_back_throw_3">Trying to shake off the dirt, the beast hits a tree</string>
-    <string name="step_back_dodge_1">You both take a defensive stance. Awkward...</string>
+    <string name="step_back_dodge_1">You both take a defensive stance. Awkward…</string>
     <string name="step_back_leap_1">You hit the ground and hurt your ankle</string>
     <string name="step_back_leap_2">You hit the ground and hurt your arm</string>
     <string name="step_back_leap_3">You hit the ground as the moose takes a defensive stance</string>
@@ -97,6 +97,9 @@
     <string name="turn_around_attack_1">You try to punch the animal, but get kicked in the head instead</string>
     <string name="turn_around_attack_2">You landed a fortunate blow, before the beast could react</string>
     <string name="initial_log">A huge moose stands in front of you</string>
+    <string name="surrender_question">Do you want to give up?</string>
+    <string name="surrender_ok">Surrender to a moose</string>
+    <string name="surrender_no">Keep fighting!</string>
     <plurals name="timeattack_score">
         <item quantity="one">You had one second left</item>
         <item quantity="other">You had %d seconds left</item>

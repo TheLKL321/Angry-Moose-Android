@@ -1,5 +1,6 @@
 package com.example.thelkl321.angrymooseandroid;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
 import android.support.v4.app.Fragment;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inflate credits popup layout
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popup = inflater.inflate(R.layout.popup_text, null);
+        @SuppressLint("InflateParams") View popup = inflater.inflate(R.layout.popup_text, null);
 
         // Set size of the credits popup
         popupWindow = new PopupWindow(popup);
@@ -127,8 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, StandardFightActivity.class);
                 break;
         }
-        intent.putExtra(MOOSE_KEY, mooseHp);
-        intent.putExtra(PLAYER_KEY, playerHp);
+        intent.putExtra(MOOSE_KEY, mooseHp).putExtra(PLAYER_KEY, playerHp);
         startActivity(intent);
     }
 
@@ -153,14 +153,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideFragment (Fragment fragment){
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.hide(fragment);
-        transaction.commit();
+        transaction.hide(fragment).commit();
     }
 
     public void showFragment (Fragment fragment){
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.show(fragment);
-        transaction.commit();
+        transaction.show(fragment).commit();
     }
 
     public void closePopup (View view){ popupWindow.dismiss(); }
