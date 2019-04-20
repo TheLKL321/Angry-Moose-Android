@@ -19,15 +19,16 @@ import android.widget.ToggleButton;
 import com.example.thelkl321.angrymooseandroid.fight.StandardFightActivity;
 import com.example.thelkl321.angrymooseandroid.fight.TimeFightActivity;
 
+import static com.example.thelkl321.angrymooseandroid.Gamemode.STANDARD_GAMEMODE;
+import static com.example.thelkl321.angrymooseandroid.Gamemode.TIMEATTACK_GAMEMODE;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String MOOSE_KEY = "moose";
     public static final String PLAYER_KEY = "player";
     public static final String TIME_KEY = "time";
-    public static final String STANDARD_GAMEMODE = "standard";
-    public static final String TIME_GAMEMODE = "time attack";
 
-    public static String gamemode;
+    public static Gamemode gamemode;
     private PlayFragment playFragment;
     private OptionsFragment optionsFragment;
     private FragmentManager fm;
@@ -82,16 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Actual credits and extract string
     public void creditsPressed (View view){
-        showPopup("Lorem ipsum dolor sit amet, consectetur\n" +
-                "adipiscing elit. Nullam tempor mi vitae\n" +
-                "odio vulputate, nec egestas quam\n" +
-                "euismod. Sed sit amet urna justo. In elementum,\n" +
-                "nulla eu pharetra lobortis, sem nisi interdum\n" +
-                "ante, id luctus ex libero quis justo. Sed\n" +
-                "volutpat tincidunt augue ac lobortis. Vestibulum\n" +
-                "a lacinia nibh. Mauris porttitor massa ut aliquet\n" +
-                "sodales. Integer sit amet turpis scelerisque,\n" +
-                "ultrices ipsum et, volutpat mi.");
+        showPopup("This app was made by Łukasz Zarębski, known as TheLKL");
     }
 
     // TODO: extract string
@@ -146,11 +138,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent intent;
-        if (gamemode.equals(TIME_GAMEMODE)) {
-            intent = new Intent(this, TimeFightActivity.class);
-            intent.putExtra(TIME_KEY, time);
-        } else {
-            intent = new Intent(this, StandardFightActivity.class);
+        switch (gamemode) {
+            case TIMEATTACK_GAMEMODE:
+                intent = new Intent(this, TimeFightActivity.class);
+                intent.putExtra(TIME_KEY, time);
+                break;
+
+            case STANDARD_GAMEMODE:
+                intent = new Intent(this, StandardFightActivity.class);
+                break;
+
+            default:
+                intent = new Intent(this, StandardFightActivity.class);
+                break;
         }
         intent.putExtra(MOOSE_KEY, mooseHp);
         intent.putExtra(PLAYER_KEY, playerHp);
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void timePressed (View view){
         if (((ToggleButton) view).isChecked()){
-            gamemode = TIME_GAMEMODE;
+            gamemode = TIMEATTACK_GAMEMODE;
         } else {
             gamemode = STANDARD_GAMEMODE;
         }
