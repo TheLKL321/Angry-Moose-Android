@@ -1,26 +1,29 @@
 package com.example.thelkl321.angrymooseandroid;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class EndgameFragment extends Fragment {
 
     private TextView outcomeText, scoreText, lastEventText;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_endgame, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         // Assign views
-        outcomeText = getView().findViewById(R.id.outcomeText);
+        outcomeText = Objects.requireNonNull(getView()).findViewById(R.id.outcomeText);
         scoreText = getView().findViewById(R.id.turnText);
         lastEventText = getView().findViewById(R.id.lastEventText);
     }

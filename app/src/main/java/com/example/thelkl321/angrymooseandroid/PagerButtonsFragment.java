@@ -1,6 +1,7 @@
 package com.example.thelkl321.angrymooseandroid;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +24,13 @@ public class PagerButtonsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageNumber = getArguments().getInt("number");
+        Bundle args = getArguments();
+        assert args != null;
+        pageNumber = args.getInt("number");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         ImageButton btn = (ImageButton) inflater.inflate(R.layout.fragment_pager_buttons, container, false);

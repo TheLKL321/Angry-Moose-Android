@@ -2,6 +2,7 @@ package com.example.thelkl321.angrymooseandroid;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,20 +12,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Objects;
+
 public class PlayFragment extends Fragment {
 
     private ViewPager mPager;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_play, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         // Instantiate a ViewPager and a PagerAdapter.
-        mPager = getView().findViewById(R.id.buttonPager);
+        mPager = Objects.requireNonNull(getView()).findViewById(R.id.buttonPager);
         PagerAdapter mPagerAdapter = new ButtonPagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
     }
