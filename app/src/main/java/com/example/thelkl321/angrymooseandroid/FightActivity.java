@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.thelkl321.angrymooseandroid.SurrenderDialogFragment.SurrenderDialogListener;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -29,8 +30,8 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     private static int playerHp;
     private static int startingPlayerHp;
     static int turnCounter, time;
-    private static HashMap<String, Integer> counters = new HashMap<>();
     private static HashMap<String, Button> moveButtons = new HashMap<>();
+    private static HashSet<Button> disabledButtons = new HashSet<>();
     private static String mooseMove;
     static String lastEvent;
 
@@ -76,33 +77,6 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
 
     abstract void startgame();
 
-    static void clearDisabilities(){
-        Button button = moveButtons.get("throw");
-        assert button != null;
-        button.setText("Throw dirt ");
-        button.setClickable(true);
-
-        button = moveButtons.get("dodge");
-        assert button != null;
-        button.setText("Dodge ");
-        button.setClickable(true);
-
-        button = moveButtons.get("leap");
-        assert button != null;
-        button.setText("Leap ");
-        button.setClickable(true);
-
-        button = moveButtons.get("kick");
-        assert button != null;
-        button.setText("Kick ");
-        button.setClickable(true);
-
-        button = moveButtons.get("attack");
-        assert button != null;
-        button.setText("Attack ");
-        button.setClickable(true);
-    }
-
     void assignTurnCounter(){
         turnCounter = 1;
         middleText = findViewById(R.id.middleText);
@@ -114,13 +88,6 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         playerHp = startingPlayerHp;
         mooseHpBar.setProgress(mooseHp);
         playerHpBar.setProgress(playerHp);
-    }
-
-    void restartMoveCounters(){
-        for (String move :
-                new String[] {"throw", "dodge", "leap", "kick", "attack"}) {
-            counters.put(move, 0);
-        }
     }
 
     abstract void endgame(String outcome);
@@ -141,20 +108,18 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     }
 
     private static void disable(String move){
-        counters.put(move, counters.get(move) + 1);
         Button button = moveButtons.get(move);
         assert button != null;
         String text = String.valueOf(button.getText());
-        button.setText(text + "X");
+        button.setText(text.concat(" X"));
         button.setClickable(false);
+        disabledButtons.add(button);
     }
 
-    private static void enable (String move){
-        Button button = moveButtons.get(move);
-        assert button != null;
+    private static void enable (Button button){
         String text = String.valueOf(button.getText());
-        String ttext = text.substring(0, text.length() - 1);
-        button.setText(ttext);
+        text = text.substring(0, text.length() - 2);
+        button.setText(text);
         button.setClickable(true);
     }
 
@@ -166,21 +131,11 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         }
     }
 
-    static void updateCounters(){
-        for (String move : counters.keySet()) {
-            int count = counters.get(move);
-            if (count > 1) {
-                counters.put(move, count - 1);
-                Button button = moveButtons.get(move);
-                assert button != null;
-                String text = String.valueOf(button.getText());
-                String ttext = text.substring(0, text.length() - 1);
-                button.setText(ttext);
-            } else if (count == 1){
-                counters.put(move, 0);
-                enable(move);
-            }
+    static void resetDisabledButtons(){
+        for (Button button : disabledButtons) {
+            enable(button);
         }
+        disabledButtons.clear();
     }
 
     private static int random() {

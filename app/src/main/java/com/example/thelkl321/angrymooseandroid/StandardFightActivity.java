@@ -6,15 +6,14 @@ public class StandardFightActivity extends FightActivity {
     protected void updateTurns(){
         turnCounter++;
         middleText.setText(String.valueOf(turnCounter));
-        updateCounters();
+        resetDisabledButtons();
     }
 
     @Override
     void startgame(){
         applyDifficulty();
         assignTurnCounter();
-        clearDisabilities();
-        restartMoveCounters();
+        resetDisabledButtons();
         eventLog.setText("");
 
         // First turn

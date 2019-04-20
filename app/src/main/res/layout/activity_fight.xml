@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -66,14 +65,14 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
                 android:layout_gravity="bottom"
-                android:text="Attack "
+                android:text="Attack"
                 android:onClick="attackPressed"/>
 
             <Button
                 android:id="@+id/kickButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kick "
+                android:text="Kick"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
@@ -90,7 +89,7 @@
                 android:id="@+id/leapButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leap "
+                android:text="Leap"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
@@ -101,7 +100,7 @@
                 android:id="@+id/dodgeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dodge "
+                android:text="Dodge"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
@@ -118,7 +117,7 @@
                 android:id="@+id/throwButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Throw dirt "
+                android:text="Throw dirt"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"

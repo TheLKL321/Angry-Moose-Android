@@ -26,14 +26,13 @@ public class TimeFightActivity extends FightActivity {
 
     @Override
     protected void updateTurns(){
-        updateCounters();
+        resetDisabledButtons();
     }
 
     @Override
     void startgame(){
         applyDifficulty();
-        clearDisabilities();
-        restartMoveCounters();
+        resetDisabledButtons();
         eventLog.setText("");
         timeGamemode(time);
 
