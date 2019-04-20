@@ -1,4 +1,4 @@
-package com.example.thelkl321.angrymooseandroid;
+package com.example.thelkl321.angrymooseandroid.fight;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.thelkl321.angrymooseandroid.MainActivity;
+import com.example.thelkl321.angrymooseandroid.R;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.example.thelkl321.angrymooseandroid;
+package com.example.thelkl321.angrymooseandroid.fight;
 
 import android.app.Activity;
 import android.app.Dialog;

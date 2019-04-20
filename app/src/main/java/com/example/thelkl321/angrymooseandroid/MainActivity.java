@@ -16,6 +16,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.thelkl321.angrymooseandroid.fight.StandardFightActivity;
+import com.example.thelkl321.angrymooseandroid.fight.TimeFightActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String MOOSE_KEY = "moose";

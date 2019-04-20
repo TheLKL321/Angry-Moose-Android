@@ -1,4 +1,4 @@
-package com.example.thelkl321.angrymooseandroid;
+package com.example.thelkl321.angrymooseandroid.fight;
 
 public class StandardFightActivity extends FightActivity {
 

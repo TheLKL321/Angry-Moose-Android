@@ -1,4 +1,4 @@
-package com.example.thelkl321.angrymooseandroid;
+package com.example.thelkl321.angrymooseandroid.fight;
 
 import android.support.v4.app.DialogFragment;
 import android.content.Intent;
@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.thelkl321.angrymooseandroid.SurrenderDialogFragment.SurrenderDialogListener;
+import com.example.thelkl321.angrymooseandroid.MainActivity;
+import com.example.thelkl321.angrymooseandroid.R;
+import com.example.thelkl321.angrymooseandroid.fight.SurrenderDialogFragment.SurrenderDialogListener;
 
 import java.util.HashMap;
 import java.util.HashSet;
