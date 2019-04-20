@@ -1,5 +1,7 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
+import com.example.thelkl321.angrymooseandroid.R;
+
 public class StandardFightActivity extends FightActivity {
 
     @Override
@@ -17,7 +19,7 @@ public class StandardFightActivity extends FightActivity {
         eventLog.setText("");
 
         // First turn
-        logEvent("A huge moose stands in front of you");
+        logEvent(getString(R.string.initial_log));
         mooseTurn();
     }
 

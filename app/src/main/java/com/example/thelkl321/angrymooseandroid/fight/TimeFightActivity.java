@@ -2,6 +2,8 @@ package com.example.thelkl321.angrymooseandroid.fight;
 
 import android.os.CountDownTimer;
 
+import com.example.thelkl321.angrymooseandroid.R;
+
 public class TimeFightActivity extends FightActivity {
 
     CountDownTimer countdown;
@@ -37,7 +39,7 @@ public class TimeFightActivity extends FightActivity {
         timeGamemode(time);
 
         // First turn
-        logEvent("A huge moose stands in front of you");
+        logEvent(getString(R.string.initial_log));
         mooseTurn();
     }
 

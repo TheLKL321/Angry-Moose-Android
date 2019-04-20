@@ -24,7 +24,6 @@ public class EndgameFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
         // Assign views
         outcomeText = Objects.requireNonNull(getView()).findViewById(R.id.outcomeText);
         scoreText = getView().findViewById(R.id.turnText);
@@ -32,18 +31,17 @@ public class EndgameFragment extends Fragment {
     }
 
     public void setValues(String outcome, String lastEvent, int score){
+        String scoreTextLoss, scoreTextVictory;
+        switch (MainActivity.gamemode) {
+            case TIMEATTACK_GAMEMODE:
+                scoreTextLoss = getResources().getQuantityString(R.plurals.timeattack_score, score, score);
+                scoreTextVictory = scoreTextLoss;
+                break;
 
-        String lossOneScoreText, lossMoreScoreText, winOneScoreText, winMoreScoreText;
-        if (MainActivity.gamemode.equals(MainActivity.TIME_GAMEMODE)) {
-            lossOneScoreText = "You had one second left";
-            lossMoreScoreText = "You had " + score + " seconds left";
-            winOneScoreText = "You had one second left!";
-            winMoreScoreText = lossMoreScoreText;
-        } else {
-            lossOneScoreText = "You survived one turn";
-            lossMoreScoreText = "You survived " + score + " turns";
-            winOneScoreText = "You won in one turn!";
-            winMoreScoreText = "You won in " + score + " turns";
+            default:    // STANDARD_GAMEMODE
+                scoreTextLoss = getResources().getQuantityString(R.plurals.standard_score_loss, score, score);
+                scoreTextVictory = getResources().getQuantityString(R.plurals.standard_score_victory, score, score);
+                break;
         }
 
 
@@ -51,26 +49,23 @@ public class EndgameFragment extends Fragment {
         switch (outcome){
             case "tie":
                 outcomeText.setText("IT'S A\nTIE");
-                if (score == 1) this.scoreText.setText(lossOneScoreText);
-                else this.scoreText.setText(lossMoreScoreText);
+                this.scoreText.setText(scoreTextLoss);
                 break;
 
             case "win":
                 outcomeText.setText("YOU\nWON");
-                if (score == 1) this.scoreText.setText(winOneScoreText); //that's not possible
-                else this.scoreText.setText(winMoreScoreText);
+                this.scoreText.setText(scoreTextVictory);
                 break;
 
             case "loss":
                 outcomeText.setText("YOU\nLOST");
-                if (score == 1) this.scoreText.setText(lossOneScoreText);
-                else this.scoreText.setText(lossMoreScoreText);
+                this.scoreText.setText(scoreTextLoss);
                 break;
 
             case "surrender":
                 outcomeText.setText("YOU\nLOST");
-                this.scoreText.setText("You ran away like a baby");
-                lastEventText.setText("The moose will laugh about you with his friends");
+                this.scoreText.setText(getString(R.string.surrender_score));
+                lastEventText.setText(getString(R.string.surrender_score_last_event));
                 break;
         }
     }

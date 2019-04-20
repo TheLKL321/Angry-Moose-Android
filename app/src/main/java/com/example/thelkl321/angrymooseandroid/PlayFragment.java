@@ -25,7 +25,6 @@ public class PlayFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = Objects.requireNonNull(getView()).findViewById(R.id.buttonPager);
         PagerAdapter mPagerAdapter = new ButtonPagerAdapter(getFragmentManager());
@@ -53,5 +52,4 @@ public class PlayFragment extends Fragment {
     public int getPageNumber (){
         return mPager.getCurrentItem();
     }
-
 }

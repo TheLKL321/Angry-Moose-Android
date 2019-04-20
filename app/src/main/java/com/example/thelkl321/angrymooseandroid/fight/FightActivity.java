@@ -25,12 +25,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class FightActivity extends AppCompatActivity implements SurrenderDialogListener{
 
     private ProgressBar mooseHpBar, playerHpBar;
-    TextView middleText;
-    TextView eventLog;
-    private static int mooseHp;
-    private static int startingMooseHp;
-    private static int playerHp;
-    private static int startingPlayerHp;
+    TextView middleText, eventLog;
+    private static int mooseHp, startingMooseHp, playerHp, startingPlayerHp;
     static int turnCounter, time;
     private static HashMap<String, Button> moveButtons = new HashMap<>();
     private static HashSet<Button> disabledButtons = new HashSet<>();
@@ -100,8 +96,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                 mooseHp += amount;
                 mooseHpBar.setProgress(mooseHp);
             }
-        }
-        else {
+        } else {
             if (playerHp + amount <= playerHpBar.getMax()) {
                 playerHp += amount;
                 playerHpBar.setProgress(playerHp);
@@ -127,16 +122,15 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
 
     private void checkEndgame (){
         if (mooseHp <= 0 || playerHp <= 0) {
-            if (mooseHp >= 0) endgame("loss");
-            else if (playerHp >= 0) endgame("win");
+            if (mooseHp > 0) endgame("loss");
+            else if (playerHp > 0) endgame("win");
             else endgame("tie");
         }
     }
 
     static void resetDisabledButtons(){
-        for (Button button : disabledButtons) {
+        for (Button button : disabledButtons)
             enable(button);
-        }
         disabledButtons.clear();
     }
 
@@ -148,32 +142,26 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         int number = random();
         if (number <= 17) {
             mooseMove = "lower head";
-            logEvent("The moose lowers it's head, pointing its antlers towards you");
-        }
-        else if (number <= 34) {
+            logEvent(getString(R.string.moose_lower_head));
+        } else if (number <= 34) {
             mooseMove = "roar";
-            logEvent("A terrifying roar spreads through the forest");
-        }
-        else if (number <= 51) {
+            logEvent(getString(R.string.moose_roar));
+        } else if (number <= 51) {
             mooseMove = "step back";
-            logEvent("The animal takes a step back");
-        }
-        else if (number <= 68) {
+            logEvent(getString(R.string.moose_step_back));
+        } else if (number <= 68) {
             mooseMove = "eat";
-            logEvent("The moose found some fresh berries");
-        }
-        else if (number <= 85){
+            logEvent(getString(R.string.moose_eat));
+        } else if (number <= 85){
             mooseMove = "pick up"; // lol "picks up his leg"
-            logEvent("The beast raises his leg");
-        }
-        else {
+            logEvent(getString(R.string.moose_pick_up));
+        } else {
             mooseMove = "turn around";
-            logEvent("The moose turns around");
+            logEvent(getString(R.string.moose_turn_around));
         }
     }
 
     private void finishTurn (String playerMove){
-
         updateTurns();
         int number = random();
 
@@ -182,63 +170,63 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                 switch (playerMove){
                     case "throw":
                         if (number <=  20){
-                            logEvent("The beast is blinded and misses its charge");
+                            logEvent(getString(R.string.lower_head_throw_1));
                         } else if (number <= 50){
                             changeHealth("moose", -2);
-                            logEvent("The moose is blinded and hits a tree");
+                            logEvent(getString(R.string.lower_head_throw_2));
                         } else {
                             changeHealth("player", -2);
-                            logEvent("The dirt fails to blind the moose. It charges at you");
+                            logEvent(getString(R.string.lower_head_throw_3));
                         }
                         break;
 
                     case "dodge":
                         if (number <= 50){
                             changeHealth("player", -2);
-                            logEvent("The dodge failed and the charging moose smashes into you");
+                            logEvent(getString(R.string.lower_head_dodge_1));
                         } else if (number <= 80){
-                            logEvent("Your dodge was successful, the beast charges past you");
+                            logEvent(getString(R.string.lower_head_dodge_2));
                         } else {
                             changeHealth("player", -1);
-                            logEvent("The moose grazes you slightly as it charges beside you");
+                            logEvent(getString(R.string.lower_head_dodge_3));
                         }
                         break;
 
                     case "leap":
                         if (number <= 5){
                             changeHealth("player", -1);
-                            logEvent("You throw yourself on the ground but the moose tramples you anyway");
+                            logEvent(getString(R.string.lower_head_leap_1));
                         } else if (number <= 20){
                             disable("kick");
-                            logEvent("The enemy charges, you hit the ground and hurt your ankle");
+                            logEvent(getString(R.string.lower_head_leap_2));
                         } else if (number <= 35){
                             disable("attack");
-                            logEvent("The enemy charges, you hit the ground and hurt your arm");
+                            logEvent(getString(R.string.lower_head_leap_3));
                         } else if (number <= 90){
-                            logEvent("You successfully evade the charging moose");
+                            logEvent(getString(R.string.lower_head_leap_4));
                         } else {
                             changeHealth("moose", -1);
-                            logEvent("The charging moose hits a tree!");
+                            logEvent(getString(R.string.lower_head_leap_5));
                         }
                         break;
 
                     case "kick":
                         if (number <= 5){
                             changeHealth("moose", -1);
-                            logEvent("You manage to kick the moose before its charge");
+                            logEvent(getString(R.string.lower_head_kick_1));
                         } else {
                             changeHealth("player", -2);
-                            logEvent("The moose charges at you, striking your chest");
+                            logEvent(getString(R.string.lower_head_kick_2));
                         }
                         break;
 
                     case "attack":
                         if (number <= 5) {
                             changeHealth("moose", -1);
-                            logEvent("Somehow, you managed to do some damage");
+                            logEvent(getString(R.string.lower_head_attack_1));
                         } else {
                             changeHealth("player", -2);
-                            logEvent("The moose charges at you, striking your chest");
+                            logEvent(getString(R.string.lower_head_attack_2));
                         }
                         break;
                 }
@@ -249,21 +237,21 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                     case "throw":
                         if (number <= 60){
                             changeHealth("player", -1);
-                            logEvent("Your throw is ineffective, the moose hits you anyway");
+                            logEvent(getString(R.string.roar_throw_1));
                         } else {
-                            logEvent("The moose is distracted by the dirt, you escape any harm");
+                            logEvent(getString(R.string.roar_throw_2));
                         }
                         break;
 
                     case "dodge":
                         if (number <= 70){
-                            logEvent("You dodge the animal's attack");
+                            logEvent(getString(R.string.roar_dodge_1));
                         } else if (number <= 75){
                             changeHealth("player", -1);
-                            logEvent("The moose grazed your shoulder");
+                            logEvent(getString(R.string.roar_dodge_2));
                         } else {
                             disable("leap");
-                            logEvent("You dodge the moose's attack, but stumbled and hit your knee");
+                            logEvent(getString(R.string.roar_dodge_3));
                         }
                         break;
 
@@ -273,36 +261,36 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                             disable("attack");
                             disable("kick");
                             disable("throw");
-                            logEvent("You fall to the ground and the animal mangles you terribly");
+                            logEvent(getString(R.string.roar_leap_1));
                         } else if (number <= 90){
                             changeHealth("player", -2);
                             disable("attack");
-                            logEvent("You fall to the ground needlessly and pay for it ");
+                            logEvent(getString(R.string.roar_leap_2));
                         } else {
                             changeHealth("player", -1);
-                            logEvent("You fall to the ground, but manage to recover before the moose does much damage");
+                            logEvent(getString(R.string.roar_leap_3));
                         }
                         break;
 
                     case "kick":
                         if (number <= 5) {
                             changeHealth("player", -1);
-                            logEvent("Your kick is too slow and the enemy attack lands");
+                            logEvent(getString(R.string.roar_kick_1));
                         } else {
                             changeHealth("moose", -1);
-                            logEvent("Your kick is unexpected and so the moose fails to react");
+                            logEvent(getString(R.string.roar_kick_2));
                         }
                         break;
 
                     case "attack":
                         if (number <= 50){
-                            changeHealth("player", -1);
-                            logEvent("You land a punch before the animal attacks");
+                            changeHealth("moose", -1);
+                            logEvent(getString(R.string.roar_attack_1));
                         } else if (number <= 80){
-                            logEvent("You both miss and stare at each other confused");
+                            logEvent(getString(R.string.roar_attack_2));
                         } else {
                             changeHealth("player", -1);
-                            logEvent("Your hand gets stuck in antlers");
+                            logEvent(getString(R.string.roar_attack_3));
                         }
                         break;
                 }
@@ -312,49 +300,49 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                 switch (playerMove){
                     case "throw":
                         if (number <= 80){
-                            logEvent("You throw some dirt at the moose. It's not very effective...");
+                            logEvent(getString(R.string.step_back_throw_1));
                         } else if (number <= 90) {
                             changeHealth("player", -2);
-                            logEvent("Thanks to the defensive position, the moose foresaw your move");
+                            logEvent(getString(R.string.step_back_throw_2));
                         } else {
                             changeHealth("moose", -2);
-                            logEvent("Trying to shake off the dirt, the beast hits a tree");
+                            logEvent(getString(R.string.step_back_throw_3));
                         }
                         break;
 
                     case "dodge":
-                        logEvent("You both take a defensive stance. Awkward...");
+                        logEvent(getString(R.string.step_back_dodge_1));
                         break;
 
                     case "leap":
                         if (number <= 15){
                             disable("kick");
-                            logEvent("You hit the ground and hurt your ankle");
+                            logEvent(getString(R.string.step_back_leap_1));
                         } else if (number <= 30){
                             disable("attack");
-                            logEvent("You hit the ground and hurt your arm");
+                            logEvent(getString(R.string.step_back_leap_2));
                         } else {
-                            logEvent("You hit the ground as the moose takes a defensive stance");
+                            logEvent(getString(R.string.step_back_leap_3));
                         }
                         break;
 
                     case "kick":
                         if (number <= 50){
                             changeHealth("moose", -2);
-                            logEvent("The moose's defensive stance fails to stop you");
+                            logEvent(getString(R.string.step_back_kick_1));
                         } else {
                             changeHealth("player", -2);
-                            logEvent("The moose's defensive stance allows him to counter");
+                            logEvent(getString(R.string.step_back_kick_2));
                         }
                         break;
 
                     case "attack":
                         if (number <= 50){
                             changeHealth("moose", -1);
-                            logEvent("The moose's defensive stance fails to stop you");
+                            logEvent(getString(R.string.step_back_attack_1));
                         } else {
                             changeHealth("player", -1);
-                            logEvent("The moose's defensive stance allows him to counter");
+                            logEvent(getString(R.string.step_back_attack_2));
                         }
                         break;
                 }
@@ -365,76 +353,76 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                     case "throw":
                         if (number <= 30){
                             changeHealth("moose", 1);
-                            logEvent("You throw dirt at an eating moose. Rude.");
+                            logEvent(getString(R.string.eat_throw_1));
                         } else {
-                            logEvent("The dirt lands in the berries and destroys the meal. The moose will remember this");
+                            logEvent(getString(R.string.eat_throw_2));
                         }
                         break;
 
                     case "dodge":
                         if (number <= 90){
                             changeHealth("moose", 1);
-                            logEvent("You step back, allowing the moose to eat peacefully. He smiles in gratitude");
+                            logEvent(getString(R.string.eat_dodge_1));
                         } else {
                             changeHealth("moose", 2);
-                            logEvent("You allow the animal to find even more berries. How nice!");
+                            logEvent(getString(R.string.eat_dodge_2));
                         }
                         break;
 
                     case "leap":
                         if (number <= 50) {
                             changeHealth("moose", 1);
-                            logEvent("You drop to the ground and allow the moose to eat his berries");
+                            logEvent(getString(R.string.eat_leap_1));
                         } else if (number <= 65){
                             changeHealth("moose", 1);
                             disable("kick");
-                            logEvent("You hit the ground, hurting your ankle as the moose eats");
+                            logEvent(getString(R.string.eat_leap_2));
                         } else if (number <= 80){
                             changeHealth("moose", 1);
                             disable("attack");
-                            logEvent("You hit the ground, hurting your arm as the moose eats");
+                            logEvent(getString(R.string.eat_leap_3));
                         } else {
                             changeHealth("moose", 2);
-                            logEvent("You drop to the ground, which lets the animal find even more berries");
+                            logEvent(getString(R.string.eat_leap_4));
                         }
                         break;
 
                     case "kick":
                         if (number <= 5){
                             changeHealth("player", 1);
-                            logEvent("You steal the berries and eat them");
+                            logEvent(getString(R.string.eat_kick_1));
                         } else if (number <= 60){
                             changeHealth("moose", -2);
-                            logEvent("You take advantage of the distraction and land a blow");
+                            logEvent(getString(R.string.eat_kick_2));
                         } else if (number <= 70){
                             changeHealth("moose", 1);
-                            logEvent("You miss and allow the moose to eat his berries");
+                            logEvent(getString(R.string.eat_kick_3));
                         } else if (number <= 95){
                             changeHealth("moose", -1);
-                            logEvent("You manage to deny the meal");
+                            logEvent(getString(R.string.eat_kick_4));
                         } else {
                             changeHealth("player", -1);
                             disable("attack");
                             disable("kick");
-                            logEvent("You try to take the berries, but that makes the animal very mad");
+                            logEvent(getString(R.string.eat_kick_5));
                         }
                         break;
 
                     case "attack":
                         if (number <= 30){
                             changeHealth("player", 1);
-                            logEvent("You steal the berries and eat them");
+                            logEvent(getString(R.string.eat_attack_1));
                         } else if (number <= 40){
                             changeHealth("moose", 1);
-                            logEvent("You miss and allow the moose to eat his berries");
+                            logEvent(getString(R.string.eat_attack_2));
                         } else if (number <= 95){
                             changeHealth("moose", -1);
-                            logEvent("You take advantage of the situation, but the berries get lost in the tumble");
+                            logEvent(getString(R.string.eat_attack_3));
                         } else {
                             changeHealth("player", -1);
                             disable("attack");
                             disable("kick");
-                            logEvent("You try to take the berries, but that makes the animal very mad");
+                            logEvent(getString(R.string.eat_attack_4));
                         }
                         break;
                 }
@@ -445,59 +433,59 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                     case "throw":
                         if (number <= 30){
                             changeHealth("moose", -1);
-                            logEvent("Confused moose hits his head on a branch");
+                            logEvent(getString(R.string.pick_up_throw_1));
                         } else if (number <= 60){
                             disable("attack");
                             disable("throw");
-                            logEvent("The moose kicks dirt into your eyes, you can't see");
+                            logEvent(getString(R.string.pick_up_throw_2));
                         } else {
-                            logEvent("The moose kicks dirt into your eyes as you throw some into his. You both take a moment");
+                            logEvent(getString(R.string.pick_up_throw_3));
                         }
                         break;
 
                     case "dodge":
                         if (number <= 50){
-                            logEvent("The moose kicks dirt into the air, but you dodge it gracefully");
+                            logEvent(getString(R.string.pick_up_dodge_1));
                         } else if (number <= 80){
                             disable("dodge");
                             disable("kick");
-                            logEvent("The moose kicks dirt into your eyes, you stumble and fall");
+                            logEvent(getString(R.string.pick_up_dodge_2));
                         } else {
                             disable("attack");
                             disable("throw");
-                            logEvent("The moose kicks dirt into your eyes, you can't see");
+                            logEvent(getString(R.string.pick_up_dodge_3));
                         }
                         break;
 
                     case "leap":
                         if (number <= 15){
                             disable("kick");
-                            logEvent("You dodge the attack, but hurt your ankle");
+                            logEvent(getString(R.string.pick_up_leap_1));
                         } else if (number <= 30){
                             disable("attack");
-                            logEvent("You dodge the attack, but hurt your arm");
+                            logEvent(getString(R.string.pick_up_leap_2));
                         } else {
-                            logEvent("You hit the ground as the moose kicks dirt at you");
+                            logEvent(getString(R.string.pick_up_leap_3));
                         }
                         break;
 
                     case "kick":
                         if (number <= 70){
                             changeHealth("player", -1);
-                            logEvent("The fiend kicks dirt at your eyes, and counters your attack");
+                            logEvent(getString(R.string.pick_up_kick_1));
                         } else {
                             changeHealth("moose", -1);
-                            logEvent("Despite the dirt kicked at your eyes you manage to do some damage");
+                            logEvent(getString(R.string.pick_up_kick_2));
                         }
                         break;
 
                     case "attack":
                         if (number <= 90){
                             changeHealth("player", -1);
-                            logEvent("The fiend kicks dirt at your eyes, and counters your attack");
+                            logEvent(getString(R.string.pick_up_attack_1));
                         } else {
                             changeHealth("moose", -1);
-                            logEvent("Despite the dirt kicked at your eyes you manage to do some damage");
+                            logEvent(getString(R.string.pick_up_attack_2));
                         }
                         break;
                 }
@@ -509,64 +497,64 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                         if (number <= 50){
                             changeHealth("player", -3);
                             disable("throw");
-                            logEvent("You throw dirt at its butt. It doesn't care and kicks your face");
+                            logEvent(getString(R.string.turn_around_throw_1));
                         } else if (number <= 75){
                             changeHealth("player", -2);
                             disable("leap");
                             disable("dodge");
-                            logEvent("You throw dirt at its butt and get kicked in stomach");
+                            logEvent(getString(R.string.turn_around_throw_2));
                         } else {
                             changeHealth("player", 1);
                             disable("attack");
-                            logEvent("You throw dirt at its butt and get kicked in your arm");
+                            logEvent(getString(R.string.turn_around_throw_3));
                         }
                         break;
 
                     case "dodge":
                         if (number <= 40){
                             changeHealth("player", -3);
-                            logEvent("Your dodge wasn't enough, you get kicked in chest");
+                            logEvent(getString(R.string.turn_around_dodge_1));
                         } else if (number <= 70){
                             disable("dodge");
                             disable("leap");
-                            logEvent("You stumbled and fell, but you dodged the kick");
+                            logEvent(getString(R.string.turn_around_dodge_2));
                         } else {
-                            logEvent("Somehow you manage to dodge the kick");
+                            logEvent(getString(R.string.turn_around_dodge_3));
                         }
                         break;
 
                     case "leap":
                         if (number <= 60){
-                            logEvent("You successfully evade the kick");
+                            logEvent(getString(R.string.turn_around_leap_1));
                         } else if (number <= 65){
                             changeHealth("player", -1);
-                            logEvent("You evaded the kick, but hit a rock on the ground");
+                            logEvent(getString(R.string.turn_around_leap_2));
                         } else if (number <= 70){
                             changeHealth("moose", -1);
-                            logEvent("The best misses and hits a rock");
+                            logEvent(getString(R.string.turn_around_leap_3));
                         } else if (number <= 85){
                             disable("kick");
-                            logEvent("You dodge the kick, but hurt your ankle");
+                            logEvent(getString(R.string.turn_around_leap_4));
                         } else {
                             disable("attack");
-                            logEvent("You dodge the kick, but hurt your arm");
+                            logEvent(getString(R.string.turn_around_leap_5));
                         }
                         break;
 
                     case "kick":
                         if (number <= 5){
                             changeHealth("moose", -1);
-                            logEvent("Your unexpected assault brings results");
+                            logEvent(getString(R.string.turn_around_kick_1));
                         } else if (number <= 35){
                             changeHealth("player", -3);
-                            logEvent("You try to kick the moose, but get stopped by a kick to the chest");
+                            logEvent(getString(R.string.turn_around_kick_2));
                         } else if (number <= 65){
                             changeHealth("player", -1);
-                            logEvent("You try to kick the moose, but get stopped by a kick to the shoulder");
+                            logEvent(getString(R.string.turn_around_kick_3));
                         } else {
                             changeHealth("player", -1);
                             changeHealth("moose", -1);
-                            logEvent("You land a kick as the beast's hoof grazes your shoulder");
+                            logEvent(getString(R.string.turn_around_kick_4));
                         }
                         break;
 
@@ -575,10 +563,10 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
                             changeHealth("player", -3);
                             disable("attack");
                             disable("throw");
-                            logEvent("You try to punch the animal, but get kicked in the head instead");
+                            logEvent(getString(R.string.turn_around_attack_1));
                         } else {
                             changeHealth("moose", -1);
-                            logEvent("You landed a fortunate blow, before the beast could react");
+                            logEvent(getString(R.string.turn_around_attack_2));
                         }
                         break;
                 }
@@ -647,7 +635,8 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
 
     @Override
     public void onBackPressed (){
-        if (endgameFragment.isVisible()) finish();
+        if (endgameFragment.isVisible())
+            finish();
         else {
             DialogFragment dialog = new SurrenderDialogFragment();
             dialog.show(getSupportFragmentManager(), "surrender");
@@ -660,9 +649,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     }
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        //Do nothing
-    }
+    public void onDialogNegativeClick(DialogFragment dialog) { /* Do nothing */ }
 
     protected abstract void updateTurns();
 }

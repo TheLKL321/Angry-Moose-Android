@@ -81,32 +81,11 @@ public class MainActivity extends AppCompatActivity {
         showFragment(optionsFragment);
     }
 
-    //TODO: Actual credits and extract string
-    public void creditsPressed (View view){
-        showPopup("This app was made by Łukasz Zarębski, known as TheLKL");
-    }
+    public void creditsPressed (View view){ showPopup(getString(R.string.credits)); }
 
-    // TODO: extract string
-    public void helpPressed (View view){
-        showPopup("Press a button to make your move.\n" +
-                "Your goal is to decrease the moose's\n" +
-                "health to 0 without dying yourself.\n" +
-                "\n" +
-                "Moves:\n" +
-                "Attack - you attempt to throw a punch\n" +
-                "Kick - you try to kick the moose\n" +
-                "Leap - you throw yourself on the floor to evade an attack\n" +
-                "Dodge - you step to the side, doing a light dodge\n" +
-                "Throw dirt - you grab a handful of earth to chuck it at the beast's eyes\n" +
-                "\n" +
-                "In the middle of the screen you'll find an event log. Use it to find out about mooses actions and their consequences\n" +
-                "Watch out! The beast can feast on wild berries to heal himself\n" +
-                "\n" +
-                "Good luck!");
-    }
+    public void helpPressed (View view){ showPopup(getString(R.string.help)); }
 
     public void difficultyPressed (View view){
-
         int mooseHp, playerHp, time;
         switch (playFragment.getPageNumber()) {
             case 0:
@@ -144,11 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(TIME_KEY, time);
                 break;
 
-            case STANDARD_GAMEMODE:
-                intent = new Intent(this, StandardFightActivity.class);
-                break;
-
-            default:
+            default:    // STANDARD_GAMEMODE
                 intent = new Intent(this, StandardFightActivity.class);
                 break;
         }
@@ -158,23 +133,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void timePressed (View view){
-        if (((ToggleButton) view).isChecked()){
+        if (((ToggleButton) view).isChecked())
             gamemode = TIMEATTACK_GAMEMODE;
-        } else {
+        else
             gamemode = STANDARD_GAMEMODE;
-        }
     }
 
     // Close the popup on back press
     @Override
     public void onBackPressed (){
-        if (popupWindow.isShowing()){
+        if (popupWindow.isShowing())
             popupWindow.dismiss();
-        } else if (playFragment.isVisible()){
+        else if (playFragment.isVisible())
             hideFragment(playFragment);
-        } else if (optionsFragment.isVisible()){
+        else if (optionsFragment.isVisible())
             hideFragment(optionsFragment);
-        }
         else finish();
     }
 
@@ -190,9 +163,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void closePopup (View view){
-        popupWindow.dismiss();
-    }
+    public void closePopup (View view){ popupWindow.dismiss(); }
 
     public void showPopup (String text){
         popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0, (size.y - realSize.y)/2);
