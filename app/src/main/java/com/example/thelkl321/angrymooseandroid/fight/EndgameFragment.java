@@ -34,7 +34,12 @@ public class EndgameFragment extends Fragment {
         String scoreTextLoss, scoreTextVictory;
         switch (MainActivity.gamemode) {
             case TIMEATTACK_GAMEMODE:
-                scoreTextLoss = getResources().getQuantityString(R.plurals.timeattack_score, score, score);
+                if (score == 0) {
+                    scoreTextLoss = "You ran out of time";
+                    lastEvent = "";
+                } else {
+                    scoreTextLoss = getResources().getQuantityString(R.plurals.timeattack_score, score, score);
+                }
                 scoreTextVictory = scoreTextLoss;
                 break;
 

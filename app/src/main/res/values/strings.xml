@@ -98,7 +98,6 @@
     <string name="turn_around_attack_2">You landed a fortunate blow, before the beast could react</string>
     <string name="initial_log">A huge moose stands in front of you</string>
     <plurals name="timeattack_score">
-        <item quantity="zero">You ran out of time</item>
         <item quantity="one">You had one second left</item>
         <item quantity="other">You had %d seconds left</item>
     </plurals>

@@ -20,6 +20,7 @@ public class TimeFightActivity extends FightActivity {
 
             @Override
             public void onFinish() {
+                currentTime = 0;    // prevents a bug where currentTime is not 0, even though onFinish was called
                 endgame("loss");
             }
         };
@@ -43,7 +44,6 @@ public class TimeFightActivity extends FightActivity {
         mooseTurn();
     }
 
-    // TODO: different text for running out of time
     @Override
     void endgame(String outcome){
         countdown.cancel();
