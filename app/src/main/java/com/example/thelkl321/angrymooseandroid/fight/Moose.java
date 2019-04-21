@@ -8,7 +8,7 @@ class Moose extends Fighter {
         super(maxHealth, myWorld);
     }
 
-    MooseMove mooseTurn(){
+    MooseMove mooseTurn() {
         int number = FightActivity.random();
         if (number <= 17) {
             myWorld.logEvent(R.string.moose_lower_head);
@@ -22,7 +22,7 @@ class Moose extends Fighter {
         } else if (number <= 68) {
             myWorld.logEvent(R.string.moose_eat);
             return MooseMove.EAT;
-        } else if (number <= 85){
+        } else if (number <= 85) {
             myWorld.logEvent(R.string.moose_pick_up);
             return MooseMove.RAISE_LEG;
         } else {

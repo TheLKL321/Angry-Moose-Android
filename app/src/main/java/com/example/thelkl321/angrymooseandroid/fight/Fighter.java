@@ -10,11 +10,15 @@ abstract class Fighter {
         this.myWorld = myWorld;
     }
 
-    void takeDamage (int damage) {
+    void takeDamage(int damage) {
         health = (health - damage) % maxHealth;
     }
 
-    void reset () { health = maxHealth; }
+    void reset() {
+        health = maxHealth;
+    }
 
-    int getHealth () { return health; }
+    int getHealth() {
+        return health;
+    }
 }

@@ -17,6 +17,7 @@ public class SurrenderDialogFragment extends DialogFragment {
 
     public interface SurrenderDialogListener {
         void onDialogPositiveClick(DialogFragment dialog);
+
         void onDialogNegativeClick(DialogFragment dialog);
     }
 

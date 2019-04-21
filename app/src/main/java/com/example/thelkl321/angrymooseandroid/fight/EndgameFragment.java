@@ -30,7 +30,7 @@ public class EndgameFragment extends Fragment {
         lastEventText = getView().findViewById(R.id.lastEventText);
     }
 
-    public void setValues(Outcome outcome, String lastEvent, int score){
+    void setValues(Outcome outcome, String lastEvent, int score) {
         String scoreTextLoss, scoreTextVictory;
         switch (MainActivity.gamemode) {
             case TIMEATTACK_GAMEMODE:
@@ -51,7 +51,7 @@ public class EndgameFragment extends Fragment {
 
 
         lastEventText.setText(lastEvent);
-        switch (outcome){
+        switch (outcome) {
             case TIE:
                 outcomeText.setText(getString(R.string.outcome_tie));
                 this.scoreText.setText(scoreTextLoss);

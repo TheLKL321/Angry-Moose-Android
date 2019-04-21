@@ -3,9 +3,7 @@ package com.example.thelkl321.angrymooseandroid;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private PlayFragment playFragment;
     private OptionsFragment optionsFragment;
     private FragmentManager fm;
-    private static PopupWindow popupWindow;
+    private PopupWindow popupWindow;
     private Point realSize = new Point(), size = new Point();
 
     @Override
@@ -52,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") View popup = inflater.inflate(R.layout.popup_text, null);
 
-        // Set size of the credits popup
+        // Set size of the credits/help popup
         popupWindow = new PopupWindow(popup);
         popupWindow.setWidth(size.x - 100);
         popupWindow.setHeight(size.y - 100);
 
         // Set a listener for close popup button
         Button btn = popup.findViewById(R.id.closePopupButton);
-        btn.setOnClickListener(new Button.OnClickListener(){
+        btn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
@@ -70,23 +68,27 @@ public class MainActivity extends AppCompatActivity {
         fm = getSupportFragmentManager();
         playFragment = (PlayFragment) fm.findFragmentById(R.id.playFragment);
         optionsFragment = (OptionsFragment) fm.findFragmentById(R.id.optionsFragment);
-        hideFragment(playFragment);
-        hideFragment(optionsFragment);
+        FragmentHelper.hideFragment(playFragment, fm);
+        FragmentHelper.hideFragment(optionsFragment, fm);
     }
 
-    public void playPressed (View view){
-        showFragment(playFragment);
+    public void playPressed(View view) {
+        FragmentHelper.showFragment(playFragment, fm);
     }
 
-    public void optionsPressed (View view){
-        showFragment(optionsFragment);
+    public void optionsPressed(View view) {
+        FragmentHelper.showFragment(optionsFragment, fm);
     }
 
-    public void creditsPressed (View view){ showPopup(getString(R.string.credits)); }
+    public void creditsPressed(View view) {
+        showPopup(getString(R.string.credits));
+    }
 
-    public void helpPressed (View view){ showPopup(getString(R.string.help)); }
+    public void helpPressed(View view) {
+        showPopup(getString(R.string.help));
+    }
 
-    public void difficultyPressed (View view){
+    public void difficultyPressed(View view) {
         int mooseHp, playerHp, time;
         switch (playFragment.getPageNumber()) {
             case 0:
@@ -132,44 +134,36 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void timePressed (View view){
+    public void timePressed(View view) {
         if (((ToggleButton) view).isChecked())
             gamemode = TIMEATTACK_GAMEMODE;
         else
             gamemode = STANDARD_GAMEMODE;
     }
 
-    // Close the popup on back press
     @Override
-    public void onBackPressed (){
+    public void onBackPressed() {
         if (popupWindow.isShowing())
             popupWindow.dismiss();
         else if (playFragment.isVisible())
-            hideFragment(playFragment);
+            FragmentHelper.hideFragment(playFragment, fm);
         else if (optionsFragment.isVisible())
-            hideFragment(optionsFragment);
+            FragmentHelper.hideFragment(optionsFragment, fm);
         else finish();
     }
 
-    public void hideFragment (Fragment fragment){
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.hide(fragment).commit();
-    }
-
-    public void showFragment (Fragment fragment){
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.show(fragment).commit();
-    }
-
-    public void closePopup (View view){ popupWindow.dismiss(); }
-
-    public void showPopup (String text){
-        popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER,0, (size.y - realSize.y)/2);
+    public void showPopup(String text) {
+        popupWindow.showAtLocation(findViewById(R.id.mainLayout), Gravity.CENTER, 0, (size.y - realSize.y) / 2);
         TextView popupText = popupWindow.getContentView().findViewById(R.id.popupText);
         popupText.setText(text);
     }
 
-    public void exitPressed (View view){
+    // Called by X button on popup
+    public void closePopup(View view) {
+        popupWindow.dismiss();
+    }
+
+    public void exitPressed(View view) {
         finish();
         System.exit(0);
     }

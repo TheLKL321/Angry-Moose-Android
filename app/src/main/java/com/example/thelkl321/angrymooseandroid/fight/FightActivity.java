@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.thelkl321.angrymooseandroid.FragmentHelper;
 import com.example.thelkl321.angrymooseandroid.MainActivity;
 import com.example.thelkl321.angrymooseandroid.R;
 import com.example.thelkl321.angrymooseandroid.fight.SurrenderDialogFragment.SurrenderDialogListener;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class FightActivity extends AppCompatActivity implements SurrenderDialogListener{
+public abstract class FightActivity extends AppCompatActivity implements SurrenderDialogListener {
 
     private ProgressBar mooseHpBar, playerHpBar;
     TextView middleText, logBox;
@@ -34,7 +35,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     String lastEvent;
 
     protected Intent intent;
-    private FragmentManager fm;
+    protected FragmentManager fm;
     EndgameFragment endgameFragment;
 
     @Override
@@ -71,7 +72,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         // Assign the endgame fragment and hide it
         fm = getSupportFragmentManager();
         endgameFragment = (EndgameFragment) fm.findFragmentById(R.id.endgameFragment);
-        hideFragment(endgameFragment);
+        FragmentHelper.hideFragment(endgameFragment, fm);
 
         // Create characters
         moose = new Moose(startingMooseHp, this);
@@ -84,13 +85,18 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         lastMooseMove = moose.mooseTurn();
     }
 
-    abstract void startgame();              // Called right before the first moose turn
+    static int random() {
+        return ThreadLocalRandom.current().nextInt(0, 100 + 1);
+    }
 
-    abstract void endgame(Outcome outcome);  // Called on death of either moose or the player
+    protected abstract void startgame();              // Called right before the first moose turn
+
+    protected abstract void endgame(Outcome outcome);  // Called on death of either moose or the player
 
     protected abstract void updateTurns();  // Called right after the player pick their move
 
-    void disable(PlayerMove move){
+    // Disables a move
+    void disable(PlayerMove move) {
         Button button = moveButtons.get(move);
         assert button != null;
         String text = String.valueOf(button.getText());
@@ -99,15 +105,17 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         disabledButtons.add(button);
     }
 
-    private void enable (Button button){
+    // Re-enables a move
+    private void enable(Button button) {
         String text = String.valueOf(button.getText());
         text = text.substring(0, text.length() - 2);
         button.setText(text);
         button.setClickable(true);
     }
 
-    private void checkEndgame (){
-        if (moose.getHealth() <= 0){
+    // Checks if a character is dead
+    private void checkEndgame() {
+        if (moose.getHealth() <= 0) {
             if (player.getHealth() <= 0)
                 endgame(Outcome.TIE);
             else
@@ -116,13 +124,13 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
             endgame(Outcome.LOSS);
     }
 
-    void resetDisabledButtons(){
+    protected void resetDisabledButtons() {
         for (Button button : disabledButtons)
             enable(button);
         disabledButtons.clear();
     }
 
-    void resetGame() {
+    private void resetGame() {
         moose.reset();
         player.reset();
         mooseHpBar.setProgress(moose.getHealth());
@@ -132,11 +140,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         lastMooseMove = moose.mooseTurn();
     }
 
-    static int random() {
-        return ThreadLocalRandom.current().nextInt(0, 100 + 1);
-    }
-
-    private void finishTurn (PlayerMove playerMove){
+    private void turn(PlayerMove playerMove) {
         updateTurns();
         player.tradeBlows(playerMove, lastMooseMove);
         mooseHpBar.setProgress(moose.getHealth());
@@ -146,62 +150,50 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     }
 
     // Prints the string under resId in the logBox
-    void logEvent(int resId){
+    void logEvent(int resId) {
         String text = getString(resId);
         logBox.append("\n" + text);
         lastEvent = text;
     }
 
-    public void throwPressed (View view){
-        finishTurn(PlayerMove.THROW);
+    public void throwPressed(View view) {
+        turn(PlayerMove.THROW);
     }
 
-    public void dodgePressed (View view){
-        finishTurn(PlayerMove.DODGE);
+    public void dodgePressed(View view) {
+        turn(PlayerMove.DODGE);
     }
 
-    public void leapPressed (View view){
-        finishTurn(PlayerMove.LEAP);
+    public void leapPressed(View view) {
+        turn(PlayerMove.LEAP);
     }
 
-    public void kickPressed (View view){
-        finishTurn(PlayerMove.KICK);
+    public void kickPressed(View view) {
+        turn(PlayerMove.KICK);
     }
 
-    public void attackPressed (View view){
-        finishTurn(PlayerMove.ATTACK);
+    public void attackPressed(View view) {
+        turn(PlayerMove.ATTACK);
     }
 
-    public void backPressed (View view){
+    public void backPressed(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void retryPressed (View view){
+    public void retryPressed(View view) {
         resetGame();
         startgame();
-        hideFragment(endgameFragment);
+        FragmentHelper.hideFragment(endgameFragment, fm);
     }
 
-    public void sharePressed (View view){
+    public void sharePressed(View view) {
         //TODO: social media integration
     }
 
-    public void hideFragment (Fragment fragment){
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.hide(fragment);
-        transaction.commit();
-    }
-
-    public void showFragment (Fragment fragment){
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.show(fragment);
-        transaction.commit();
-    }
-
     @Override
-    public void onBackPressed (){
+    public void onBackPressed() {
         if (endgameFragment.isVisible())
             finish();
         else {

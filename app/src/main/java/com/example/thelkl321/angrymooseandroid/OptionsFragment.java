@@ -14,15 +14,15 @@ public class OptionsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_options, container, false);
     }
 
-    public void vibrationsPressed (View view){
+    public void vibrationsPressed(View view) {
         //TODO
     }
 
-    public void musicPressed (View view){
+    public void musicPressed(View view) {
         //TODO
     }
 
-    public void soundPressed (View view){
+    public void soundPressed(View view) {
         //TODO
     }
 }

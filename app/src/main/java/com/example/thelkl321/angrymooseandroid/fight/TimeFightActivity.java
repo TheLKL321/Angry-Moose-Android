@@ -1,8 +1,8 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
-import android.content.Intent;
 import android.os.CountDownTimer;
 
+import com.example.thelkl321.angrymooseandroid.FragmentHelper;
 import com.example.thelkl321.angrymooseandroid.MainActivity;
 
 public class TimeFightActivity extends FightActivity {
@@ -10,7 +10,7 @@ public class TimeFightActivity extends FightActivity {
     CountDownTimer countdown;
     double currentTime;
 
-    private void timeGamemode (int time){
+    private void timeGamemode(int time) {
         currentTime = time;
         countdown = new CountDownTimer(time * 1000, 250) {
             @Override
@@ -29,21 +29,21 @@ public class TimeFightActivity extends FightActivity {
     }
 
     @Override
-    protected void updateTurns(){
+    protected void updateTurns() {
         resetDisabledButtons();
     }
 
     @Override
-    void startgame(){
+    protected void startgame() {
         int time = intent.getIntExtra(MainActivity.TIME_KEY, 0);
         timeGamemode(time);
         resetDisabledButtons();
     }
 
     @Override
-    void endgame(Outcome outcome){
+    protected void endgame(Outcome outcome) {
         countdown.cancel();
         endgameFragment.setValues(outcome, lastEvent, (int) currentTime);
-        showFragment(endgameFragment);
+        FragmentHelper.showFragment(endgameFragment, fm);
     }
 }

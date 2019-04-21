@@ -2,8 +2,6 @@
     <string name="app_name">AngryMooseAndroid</string>
     <string name="credits">This app was made by Łukasz Zarębski, known as TheLKL</string>
     <string name="help">Press a button to make your move. Your goal is to decrease the moose\'s health to 0 without dying yourself.  Moves: Attack - you attempt to throw a punch Kick - you try to kick the moose Leap - you throw yourself on the floor to evade an attack Dodge - you step to the side, doing a light dodge Throw dirt - you grab a handful of earth to chuck it at the beast\'s eyes  In the middle of the screen you\'ll find an event log. Use it to find out about mooses actions and their consequences Watch out! The beast can feast on wild berries to heal himself  Good luck!</string>
-    <string name="surrender_score">You ran away like a baby</string>
-    <string name="surrender_score_last_event">The moose will laugh about you with his friends</string>
     <string name="moose_lower_head">The moose lowers it\'s head, pointing its antlers towards you</string>
     <string name="moose_roar">A terrifying roar spreads through the forest</string>
     <string name="moose_step_back">The animal takes a step back</string>
@@ -100,6 +98,8 @@
     <string name="surrender_question">Do you want to give up?</string>
     <string name="surrender_ok">Surrender to a moose</string>
     <string name="surrender_no">Keep fighting!</string>
+    <string name="surrender_score">You ran away like a baby</string>
+    <string name="surrender_score_last_event">The moose will laugh about you with his friends</string>
     <string name="timeattack_score_out_of_time">You ran out of time</string>
     <string name="outcome_tie">IT\'S A TIE</string>
     <string name="outcome_victory">YOU WON</string>
