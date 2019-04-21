@@ -34,14 +34,8 @@ public class TimeFightActivity extends FightActivity {
 
     @Override
     void startgame(){
-        applyDifficulty();
-        resetDisabledButtons();
-        eventLog.setText("");
         timeGamemode(time);
-
-        // First turn
-        logEvent(getString(R.string.initial_log));
-        mooseTurn();
+        resetDisabledButtons();
     }
 
     @Override

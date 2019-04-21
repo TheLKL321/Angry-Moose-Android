@@ -11,16 +11,16 @@ public class StandardFightActivity extends FightActivity {
         resetDisabledButtons();
     }
 
+    void assignTurnCounter(){
+        turnCounter = 1;
+        middleText = findViewById(R.id.middleText);
+        middleText.setText(String.valueOf(turnCounter));
+    }
+
     @Override
     void startgame(){
-        applyDifficulty();
         assignTurnCounter();
         resetDisabledButtons();
-        eventLog.setText("");
-
-        // First turn
-        logEvent(getString(R.string.initial_log));
-        mooseTurn();
     }
 
     @Override
