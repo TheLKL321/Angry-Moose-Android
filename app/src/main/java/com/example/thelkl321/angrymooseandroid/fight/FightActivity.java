@@ -86,7 +86,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
 
     abstract void startgame();              // Called right before the first moose turn
 
-    abstract void endgame(String outcome);  // Called on death of either moose or the player
+    abstract void endgame(Outcome outcome);  // Called on death of either moose or the player
 
     protected abstract void updateTurns();  // Called right after the player pick their move
 
@@ -109,11 +109,11 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     private void checkEndgame (){
         if (moose.getHealth() <= 0){
             if (player.getHealth() <= 0)
-                endgame("tie");
+                endgame(Outcome.TIE);
             else
-                endgame("win");
+                endgame(Outcome.VICTORY);
         } else if (player.getHealth() <= 0)
-            endgame("loss");
+            endgame(Outcome.LOSS);
     }
 
     void resetDisabledButtons(){
@@ -212,7 +212,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        endgame("surrender");
+        endgame(Outcome.SURRENDER);
     }
 
     @Override

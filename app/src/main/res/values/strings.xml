@@ -100,6 +100,10 @@
     <string name="surrender_question">Do you want to give up?</string>
     <string name="surrender_ok">Surrender to a moose</string>
     <string name="surrender_no">Keep fighting!</string>
+    <string name="timeattack_score_out_of_time">You ran out of time</string>
+    <string name="outcome_tie">IT\'S A TIE</string>
+    <string name="outcome_victory">YOU WON</string>
+    <string name="outcome_loss">YOU LOST</string>
     <plurals name="timeattack_score">
         <item quantity="one">You had one second left</item>
         <item quantity="other">You had %d seconds left</item>

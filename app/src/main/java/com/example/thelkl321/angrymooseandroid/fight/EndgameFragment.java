@@ -30,12 +30,12 @@ public class EndgameFragment extends Fragment {
         lastEventText = getView().findViewById(R.id.lastEventText);
     }
 
-    public void setValues(String outcome, String lastEvent, int score){
+    public void setValues(Outcome outcome, String lastEvent, int score){
         String scoreTextLoss, scoreTextVictory;
         switch (MainActivity.gamemode) {
             case TIMEATTACK_GAMEMODE:
                 if (score == 0) {
-                    scoreTextLoss = "You ran out of time";
+                    scoreTextLoss = getString(R.string.timeattack_score_out_of_time);
                     lastEvent = "";
                 } else {
                     scoreTextLoss = getResources().getQuantityString(R.plurals.timeattack_score, score, score);
@@ -52,23 +52,23 @@ public class EndgameFragment extends Fragment {
 
         lastEventText.setText(lastEvent);
         switch (outcome){
-            case "tie":
-                outcomeText.setText("IT'S A\nTIE");
+            case TIE:
+                outcomeText.setText(getString(R.string.outcome_tie));
                 this.scoreText.setText(scoreTextLoss);
                 break;
 
-            case "win":
-                outcomeText.setText("YOU\nWON");
+            case VICTORY:
+                outcomeText.setText(getString(R.string.outcome_victory));
                 this.scoreText.setText(scoreTextVictory);
                 break;
 
-            case "loss":
-                outcomeText.setText("YOU\nLOST");
+            case LOSS:
+                outcomeText.setText(getString(R.string.outcome_loss));
                 this.scoreText.setText(scoreTextLoss);
                 break;
 
-            case "surrender":
-                outcomeText.setText("YOU\nLOST");
+            case SURRENDER:
+                outcomeText.setText(getString(R.string.outcome_loss));
                 this.scoreText.setText(getString(R.string.surrender_score));
                 lastEventText.setText(getString(R.string.surrender_score_last_event));
                 break;

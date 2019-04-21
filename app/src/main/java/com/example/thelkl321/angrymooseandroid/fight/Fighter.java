@@ -1,6 +1,6 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
-public abstract class Fighter {
+abstract class Fighter {
     private int health, maxHealth;
     FightActivity myWorld;
 
@@ -14,7 +14,7 @@ public abstract class Fighter {
         health = (health - damage) % maxHealth;
     }
 
-    public void reset () { health = maxHealth; }
+    void reset () { health = maxHealth; }
 
     int getHealth () { return health; }
 }
