@@ -1,8 +1,9 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 
-import com.example.thelkl321.angrymooseandroid.R;
+import com.example.thelkl321.angrymooseandroid.MainActivity;
 
 public class TimeFightActivity extends FightActivity {
 
@@ -34,6 +35,7 @@ public class TimeFightActivity extends FightActivity {
 
     @Override
     void startgame(){
+        int time = intent.getIntExtra(MainActivity.TIME_KEY, 0);
         timeGamemode(time);
         resetDisabledButtons();
     }

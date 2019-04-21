@@ -1,5 +1,7 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
+import android.content.Intent;
+
 import com.example.thelkl321.angrymooseandroid.R;
 
 public class StandardFightActivity extends FightActivity {

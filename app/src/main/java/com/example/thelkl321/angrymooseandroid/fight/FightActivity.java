@@ -27,12 +27,13 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     TextView middleText, logBox;
     private Moose moose;
     private Player player;
-    int turnCounter, time;
+    int turnCounter;
     private HashMap<PlayerMove, Button> moveButtons = new HashMap<>();
     private HashSet<Button> disabledButtons = new HashSet<>();
     private MooseMove lastMooseMove;
     String lastEvent;
 
+    protected Intent intent;
     private FragmentManager fm;
     EndgameFragment endgameFragment;
 
@@ -42,10 +43,9 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         setContentView(R.layout.activity_fight);
 
         // Get difficulty and gamemode info
-        Intent intent = getIntent();
+        intent = getIntent();
         int startingMooseHp = intent.getIntExtra(MainActivity.MOOSE_KEY, 0);
         int startingPlayerHp = intent.getIntExtra(MainActivity.PLAYER_KEY, 0);
-        time = intent.getIntExtra(MainActivity.TIME_KEY, 0);
 
         // Assign views
         mooseHpBar = findViewById(R.id.mooseHealthBar);
@@ -80,8 +80,8 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         startgame();
 
         // First turn
-        lastMooseMove = moose.mooseTurn();
         logEvent(R.string.initial_log);
+        lastMooseMove = moose.mooseTurn();
     }
 
     abstract void startgame();              // Called right before the first moose turn
@@ -120,6 +120,16 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         for (Button button : disabledButtons)
             enable(button);
         disabledButtons.clear();
+    }
+
+    void resetGame() {
+        moose.reset();
+        player.reset();
+        mooseHpBar.setProgress(moose.getHealth());
+        playerHpBar.setProgress(player.getHealth());
+        logBox.setText("");
+        logEvent(R.string.initial_log);
+        lastMooseMove = moose.mooseTurn();
     }
 
     static int random() {
@@ -169,6 +179,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     }
 
     public void retryPressed (View view){
+        resetGame();
         startgame();
         hideFragment(endgameFragment);
     }
