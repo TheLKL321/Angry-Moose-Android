@@ -3,9 +3,9 @@ package com.example.thelkl321.angrymooseandroid;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +17,7 @@ import android.widget.ToggleButton;
 
 import com.example.thelkl321.angrymooseandroid.fight.StandardFightActivity;
 import com.example.thelkl321.angrymooseandroid.fight.TimeFightActivity;
+import com.example.thelkl321.angrymooseandroid.util.FragmentUtils;
 
 import static com.example.thelkl321.angrymooseandroid.Gamemode.STANDARD_GAMEMODE;
 import static com.example.thelkl321.angrymooseandroid.Gamemode.TIMEATTACK_GAMEMODE;
@@ -68,16 +69,16 @@ public class MainActivity extends AppCompatActivity {
         fm = getSupportFragmentManager();
         playFragment = (PlayFragment) fm.findFragmentById(R.id.playFragment);
         optionsFragment = (OptionsFragment) fm.findFragmentById(R.id.optionsFragment);
-        FragmentHelper.hideFragment(playFragment, fm);
-        FragmentHelper.hideFragment(optionsFragment, fm);
+        FragmentUtils.hideFragment(playFragment, fm);
+        FragmentUtils.hideFragment(optionsFragment, fm);
     }
 
     public void playPressed(View view) {
-        FragmentHelper.showFragment(playFragment, fm);
+        FragmentUtils.showFragment(playFragment, fm);
     }
 
     public void optionsPressed(View view) {
-        FragmentHelper.showFragment(optionsFragment, fm);
+        FragmentUtils.showFragment(optionsFragment, fm);
     }
 
     public void creditsPressed(View view) {
@@ -146,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
         if (popupWindow.isShowing())
             popupWindow.dismiss();
         else if (playFragment.isVisible())
-            FragmentHelper.hideFragment(playFragment, fm);
+            FragmentUtils.hideFragment(playFragment, fm);
         else if (optionsFragment.isVisible())
-            FragmentHelper.hideFragment(optionsFragment, fm);
+            FragmentUtils.hideFragment(optionsFragment, fm);
         else finish();
     }
 

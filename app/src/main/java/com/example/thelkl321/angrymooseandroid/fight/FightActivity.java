@@ -1,11 +1,9 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
-import android.support.v4.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -13,10 +11,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.thelkl321.angrymooseandroid.FragmentHelper;
 import com.example.thelkl321.angrymooseandroid.MainActivity;
 import com.example.thelkl321.angrymooseandroid.R;
 import com.example.thelkl321.angrymooseandroid.fight.SurrenderDialogFragment.SurrenderDialogListener;
+import com.example.thelkl321.angrymooseandroid.util.FragmentUtils;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -72,7 +70,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         // Assign the endgame fragment and hide it
         fm = getSupportFragmentManager();
         endgameFragment = (EndgameFragment) fm.findFragmentById(R.id.endgameFragment);
-        FragmentHelper.hideFragment(endgameFragment, fm);
+        FragmentUtils.hideFragment(endgameFragment, fm);
 
         // Create characters
         moose = new Moose(startingMooseHp, this);
@@ -85,6 +83,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
         lastMooseMove = moose.mooseTurn();
     }
 
+    // Returns a random integer between 0 and 100
     static int random() {
         return ThreadLocalRandom.current().nextInt(0, 100 + 1);
     }
@@ -185,7 +184,7 @@ public abstract class FightActivity extends AppCompatActivity implements Surrend
     public void retryPressed(View view) {
         resetGame();
         startgame();
-        FragmentHelper.hideFragment(endgameFragment, fm);
+        FragmentUtils.hideFragment(endgameFragment, fm);
     }
 
     public void sharePressed(View view) {

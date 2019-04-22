@@ -2,8 +2,8 @@ package com.example.thelkl321.angrymooseandroid.fight;
 
 import android.os.CountDownTimer;
 
-import com.example.thelkl321.angrymooseandroid.FragmentHelper;
 import com.example.thelkl321.angrymooseandroid.MainActivity;
+import com.example.thelkl321.angrymooseandroid.util.FragmentUtils;
 
 public class TimeFightActivity extends FightActivity {
 
@@ -44,6 +44,6 @@ public class TimeFightActivity extends FightActivity {
     protected void endgame(Outcome outcome) {
         countdown.cancel();
         endgameFragment.setValues(outcome, lastEvent, (int) currentTime);
-        FragmentHelper.showFragment(endgameFragment, fm);
+        FragmentUtils.showFragment(endgameFragment, fm);
     }
 }

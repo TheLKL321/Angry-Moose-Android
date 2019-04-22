@@ -1,7 +1,7 @@
 package com.example.thelkl321.angrymooseandroid.fight;
 
-import com.example.thelkl321.angrymooseandroid.FragmentHelper;
 import com.example.thelkl321.angrymooseandroid.R;
+import com.example.thelkl321.angrymooseandroid.util.FragmentUtils;
 
 public class StandardFightActivity extends FightActivity {
 
@@ -27,6 +27,6 @@ public class StandardFightActivity extends FightActivity {
     @Override
     protected void endgame(Outcome outcome) {
         endgameFragment.setValues(outcome, lastEvent, turnCounter - 1);
-        FragmentHelper.showFragment(endgameFragment, fm);
+        FragmentUtils.showFragment(endgameFragment, fm);
     }
 }
