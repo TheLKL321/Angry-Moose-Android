@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.example.thelkl321.angrymooseandroid.fight.StandardFightActivity;
+import com.example.thelkl321.angrymooseandroid.fight.TimeFightActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,21 +25,23 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class StandardFightActivityTests {
+public class TimeFightActivityTests {
 
     @Rule
-    public IntentsTestRule<StandardFightActivity> standardFightActivityTestRule =
-            new IntentsTestRule<>(StandardFightActivity.class, false, false);
+    public IntentsTestRule<TimeFightActivity> timeFightActivityTestRule =
+            new IntentsTestRule<>(TimeFightActivity.class, false, false);
 
     @Before
     public void setDifficultyData() {
-        MainActivity.gamemode = Gamemode.STANDARD_GAMEMODE;
+        MainActivity.gamemode = Gamemode.TIMEATTACK_GAMEMODE;
         Intent intent = new Intent();
-        intent.putExtra(MainActivity.MOOSE_KEY, 10).putExtra(MainActivity.PLAYER_KEY, 10);
-        standardFightActivityTestRule.launchActivity(intent);
+        intent.putExtra(MainActivity.MOOSE_KEY, 10).putExtra(MainActivity.PLAYER_KEY, 10)
+                .putExtra(MainActivity.TIME_KEY, 8);
+        timeFightActivityTestRule.launchActivity(intent);
     }
 
     @Test
@@ -65,41 +67,41 @@ public class StandardFightActivityTests {
 
     @Test
     public void attackButton_works() {
-        int initialLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int initialLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         onView(withId(R.id.attackButton)).perform(click());
-        int newLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int newLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         assertTrue(newLength > initialLength);
     }
 
     @Test
     public void kickButton_works() {
-        int initialLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int initialLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         onView(withId(R.id.kickButton)).perform(click());
-        int newLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int newLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         assertTrue(newLength > initialLength);
     }
 
     @Test
     public void leapButton_works() {
-        int initialLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int initialLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         onView(withId(R.id.leapButton)).perform(click());
-        int newLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int newLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         assertTrue(newLength > initialLength);
     }
 
     @Test
     public void dodgeButton_works() {
-        int initialLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int initialLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         onView(withId(R.id.dodgeButton)).perform(click());
-        int newLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int newLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         assertTrue(newLength > initialLength);
     }
 
     @Test
     public void throwButton_works() {
-        int initialLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int initialLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         onView(withId(R.id.throwButton)).perform(click());
-        int newLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int newLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         assertTrue(newLength > initialLength);
     }
 
@@ -162,7 +164,7 @@ public class StandardFightActivityTests {
         onView(withId(R.id.endgameFragment)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.logText)).check(matches(withText(startsWith("\nA huge moose is standing in front of you"))));
-        int logLength = ((TextView) standardFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
+        int logLength = ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.logText)).getText().length();
         assertTrue(logLength > 60);
         assertTrue(logLength < 120);
     }
@@ -174,5 +176,26 @@ public class StandardFightActivityTests {
         onView(withId(R.id.backButton)).perform(click());
 
         intended(hasComponent(MainActivity.class.getName()));
+    }
+
+    @Test
+    public void timer_works() throws InterruptedException {
+        int initialTime = Integer.valueOf(
+                ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.middleText)).getText().toString()
+        );
+        assertEquals(8, initialTime);
+        Thread.sleep(2000);
+        int currentTime = Integer.valueOf(
+                ((TextView) timeFightActivityTestRule.getActivity().findViewById(R.id.middleText)).getText().toString()
+        );
+        assertEquals(6, currentTime);
+    }
+
+    @Test
+    public void on_timeout_lose() throws InterruptedException {
+        Thread.sleep(8100);
+
+        onView(withId(R.id.endgameFragment)).check(matches(isDisplayed()));
+        onView(withText("You ran out of time")).check(matches(isDisplayed()));
     }
 }
