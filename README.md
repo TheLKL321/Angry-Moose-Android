@@ -11,7 +11,7 @@ It's turn and text based. The moose begins, and you pick your move. The outcome 
 -- <cite>literally no one</cite>
 
 ### About the project
-The project is made in pure Java Android, as a learning experience. 
+The project is made in Java Android, as a learning experience. It uses Jetpack Test testing framework.
 
 ### TODO
 - Graphical assets
