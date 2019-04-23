@@ -3,11 +3,12 @@ package com.example.thelkl321.angrymooseandroid.fight;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.thelkl321.angrymooseandroid.R;
 
@@ -21,7 +22,7 @@ public class SurrenderDialogFragment extends DialogFragment {
         void onDialogNegativeClick(DialogFragment dialog);
     }
 
-    SurrenderDialogListener mListener;
+    private SurrenderDialogListener mListener;
 
     @Override
     public void onAttach(Context context) {

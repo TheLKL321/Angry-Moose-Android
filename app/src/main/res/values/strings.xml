@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AngryMooseAndroid</string>
     <string name="credits">This app was made by Łukasz Zarębski, known as TheLKL</string>
-    <string name="help">Press a button to make your move. Your goal is to decrease the moose\'s health to 0 without dying yourself.  Moves: Attack - you attempt to throw a punch Kick - you try to kick the moose Leap - you throw yourself on the floor to evade an attack Dodge - you step to the side, doing a light dodge Throw dirt - you grab a handful of earth to chuck it at the beast\'s eyes  In the middle of the screen you\'ll find an event log. Use it to find out about mooses actions and their consequences Watch out! The beast can feast on wild berries to heal himself  Good luck!</string>
+    <string name="help_text">Press a button to make your move. Your goal is to decrease the moose\'s health to 0 without dying yourself.  Moves: Attack - you attempt to throw a punch Kick - you try to kick the moose Leap - you throw yourself on the floor to evade an attack Dodge - you step to the side, doing a light dodge Throw dirt - you grab a handful of earth to chuck it at the beast\'s eyes  In the middle of the screen you\'ll find an event log. Use it to find out about mooses actions and their consequences Watch out! The beast can feast on wild berries to heal himself  Good luck!</string>
     <string name="moose_lower_head">The moose lowers it\'s head, pointing its antlers towards you</string>
     <string name="moose_roar">A terrifying roar spreads through the forest</string>
     <string name="moose_step_back">The animal takes a step back</string>
@@ -104,6 +104,24 @@
     <string name="outcome_tie">IT\'S A TIE</string>
     <string name="outcome_victory">YOU WON</string>
     <string name="outcome_loss">YOU LOST</string>
+    <string name="play">PLAY</string>
+    <string name="help">Help</string>
+    <string name="time_attack">Time Attack</string>
+    <string name="options">OPTIONS</string>
+    <string name="vibration_on">VIBRATION ON</string>
+    <string name="vibration_off">VIBRATION OFF</string>
+    <string name="music_on">MUSIC ON</string>
+    <string name="music_off">MUSIC OFF</string>
+    <string name="sound_on">SOUND ON</string>
+    <string name="sound_off">SOUND OFF</string>
+    <string name="fight_again">Fight again</string>
+    <string name="share">Share</string>
+    <string name="back_to_play">Back to Play</string>
+    <string name="attack">Attack</string>
+    <string name="kick">Kick</string>
+    <string name="leap">Leap</string>
+    <string name="dodge">Dodge</string>
+    <string name="throw_dirt">Throw dirt</string>
     <plurals name="timeattack_score">
         <item quantity="one">You had one second left</item>
         <item quantity="other">You had %d seconds left</item>

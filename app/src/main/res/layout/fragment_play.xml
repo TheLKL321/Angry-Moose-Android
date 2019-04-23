@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -16,14 +16,14 @@
         android:layout_weight="5"
         android:gravity="center"
         android:lineSpacingMultiplier="0.8"
-        android:text="PLAY"
+        android:text="@string/play"
         android:textColor="@color/colorText"
         android:textSize="70sp"
         android:textStyle="bold" />
 
     <!-- TODO: page indicator?
          TODO: get rid of white ripple on edge -->
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/buttonPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -40,7 +40,7 @@
             android:id="@+id/helpButton"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:text="Help"
+            android:text="@string/help"
             android:layout_weight="1"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="20dp"
@@ -52,8 +52,8 @@
             android:id="@+id/timeButton"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:textOn="Time Attack"
-            android:textOff="Time Attack"
+            android:textOn="@string/time_attack"
+            android:textOff="@string/time_attack"
             android:layout_weight="1"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="35dp"
@@ -62,4 +62,4 @@
             android:onClick="timePressed"/>
 
     </LinearLayout>
-</android.support.v7.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

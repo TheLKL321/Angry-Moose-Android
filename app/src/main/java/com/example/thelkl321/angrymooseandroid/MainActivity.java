@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +12,9 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.thelkl321.angrymooseandroid.fight.StandardFightActivity;
 import com.example.thelkl321.angrymooseandroid.fight.TimeFightActivity;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void helpPressed(View view) {
-        showPopup(getString(R.string.help));
+        showPopup(getString(R.string.help_text));
     }
 
     public void difficultyPressed(View view) {

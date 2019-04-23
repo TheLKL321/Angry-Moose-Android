@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ProgressBar
         android:id="@+id/mooseHealthBar"
@@ -65,14 +66,14 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
                 android:layout_gravity="bottom"
-                android:text="Attack"
+                android:text="@string/attack"
                 android:onClick="attackPressed"/>
 
             <Button
                 android:id="@+id/kickButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kick"
+                android:text="@string/kick"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
@@ -89,7 +90,7 @@
                 android:id="@+id/leapButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leap"
+                android:text="@string/leap"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
@@ -100,7 +101,7 @@
                 android:id="@+id/dodgeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dodge"
+                android:text="@string/dodge"
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="30dp"
@@ -117,7 +118,7 @@
                 android:id="@+id/throwButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Throw dirt"
+                android:text="@string/throw_dirt"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="15dp"
@@ -135,14 +136,14 @@
 
     </TableLayout>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="180dp" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -151,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintGuide_begin="280dp" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -164,14 +165,14 @@
         android:id="@+id/middleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        tools:text="0" />
 
     <fragment
         android:name="com.example.thelkl321.angrymooseandroid.fight.EndgameFragment"
@@ -180,4 +181,4 @@
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 package com.example.thelkl321.angrymooseandroid.util;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class FragmentUtils {
     public static void showFragment(Fragment fragment, FragmentManager fm) {
