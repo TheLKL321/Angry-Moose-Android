@@ -39,6 +39,7 @@ public class PlayFragment extends Fragment {
             super(fm);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return PagerButtonsFragment.create(position);

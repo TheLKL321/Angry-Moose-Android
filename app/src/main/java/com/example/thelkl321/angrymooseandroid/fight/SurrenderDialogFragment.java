@@ -25,7 +25,7 @@ public class SurrenderDialogFragment extends DialogFragment {
     private SurrenderDialogListener mListener;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         Activity activity = (Activity) context; // will always be an activity

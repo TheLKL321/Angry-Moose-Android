@@ -32,6 +32,18 @@ public class MainActivityTests {
             new IntentsTestRule<>(MainActivity.class, true, true);
 
     @Test
+    public void all_views_display_properly() {
+        onView(withId(R.id.titleText)).check(matches(isDisplayed()));
+        onView(withId(R.id.playButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.optionsButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.creditsButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.exitButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.fbButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.twitterButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.rateButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void playButton_click_opens_PlayFragment_back_closes() {
         onView(withId(R.id.playButton)).perform(click());
         onView(withId(R.id.playFragment)).check(matches(isDisplayed()));

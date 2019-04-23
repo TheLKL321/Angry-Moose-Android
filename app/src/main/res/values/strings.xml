@@ -94,7 +94,7 @@
     <string name="turn_around_kick_4">You land a kick as the beast\'s hoof grazes your shoulder</string>
     <string name="turn_around_attack_1">You try to punch the animal, but get kicked in the head instead</string>
     <string name="turn_around_attack_2">You landed a fortunate blow, before the beast could react</string>
-    <string name="initial_log">A huge moose stands in front of you</string>
+    <string name="initial_log">A huge moose is standing in front of you</string>
     <string name="surrender_question">Do you want to give up?</string>
     <string name="surrender_ok">Surrender to a moose</string>
     <string name="surrender_no">Keep fighting!</string>
