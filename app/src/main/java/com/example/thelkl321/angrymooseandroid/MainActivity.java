@@ -83,10 +83,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void creditsPressed(View view) {
+        popupWindow.getContentView().setContentDescription("credits");
         showPopup(getString(R.string.credits));
     }
 
     public void helpPressed(View view) {
+        popupWindow.getContentView().setContentDescription("help");
         showPopup(getString(R.string.help_text));
     }
 

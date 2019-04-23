@@ -40,18 +40,22 @@ public class PagerButtonsFragment extends Fragment {
         switch (pageNumber) {
             case 0:
                 img = R.mipmap.easy_button;
+                btn.setTag("easy");
                 break;
 
             case 1:
                 img = R.mipmap.normal_button;
+                btn.setTag("normal");
                 break;
 
             case 2:
                 img = R.mipmap.hard_button;
+                btn.setTag("hard");
                 break;
 
             case 3:
                 img = R.mipmap.impossible_button;
+                btn.setTag("impossible");
                 break;
 
             default:
