@@ -10,13 +10,13 @@ public class TimeFightActivity extends FightActivity {
     CountDownTimer countdown;
     double currentTime;
 
-    private void timeGamemode(int time) {
+    private void timeGamemode(double time) {
         currentTime = time;
-        countdown = new CountDownTimer(time * 1000, 250) {
+        countdown = new CountDownTimer((long) (time * 1000), 100) { // time will always cast to long safely
             @Override
             public void onTick(long millisUntilFinished) {
                 middleText.setText(String.valueOf((int) Math.ceil(currentTime)));
-                currentTime -= 0.25;
+                currentTime -= 0.1;
             }
 
             @Override
@@ -45,5 +45,17 @@ public class TimeFightActivity extends FightActivity {
         countdown.cancel();
         endgameFragment.setValues(outcome, lastEvent, (int) currentTime);
         FragmentUtils.showFragment(endgameFragment, fm);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        countdown.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timeGamemode(currentTime);
     }
 }
